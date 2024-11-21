@@ -1,0 +1,64 @@
+---
+import "@styles/global.css";
+import Navigation from "./Navigation.astro";
+import HamburguerMenu from "./HamburguerMenu.astro";
+const logo = ""
+const companyName = "PLANCITOS"
+---
+
+
+
+<header class="pd-mobile">
+  <div class="w-max header-wrapper">
+    <div class="logo--wrapper">
+      <img alt="">
+      <span class="quicksand-800 company-name"><a href="/">{companyName}</a></span>
+    </div>
+    
+    <Navigation isDesktop="true"></Navigation>
+    <HamburguerMenu companyName={companyName}></HamburguerMenu>
+  </div>
+
+</header>
+
+<script>
+  import '@scripts/menu.js'
+</script>
+
+<style>
+  header {
+    background: var(--clr-pry-base-1);
+    min-height: 80px;
+    align-content: center;
+  }
+
+  .header-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+
+  }
+
+  .company-name {
+    font-weight: 800;
+    font-size: 2rem;
+  }
+  .company-name a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .logo--wrapper {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media screen and (width >= 770px) {
+
+  }
+  
+
+
+</style>

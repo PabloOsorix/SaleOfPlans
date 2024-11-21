@@ -1,0 +1,124 @@
+---
+import '@styles/global.css'
+import Navigation from './Navigation.astro'
+const { companyName } = Astro.props
+---
+
+<section class="menu--wrapper">
+<input type="checkbox" id="menu-mobile--input">
+<label id="hamburguer" for="menu-mobile--input">
+    <hr></hr>
+    <hr></hr>
+    <hr></hr>
+</label>
+<div id="menu-mobile--wrapper">
+    <span class="quicksand-800 company-name"><a href="/">{companyName}</a></span>
+    <Navigation isMobile="true"></Navigation>
+</div>
+</section>
+
+</body>
+
+<style>
+/* nav styles */
+
+.hamburguer .line {
+  display: block;
+  align-content: center;
+  width: 40px;
+  height: 3px;
+  background-color: white;
+}
+
+.hamburguer-wrapper {
+  cursor: pointer;
+}
+#menu-mobile--wrapper {
+    background: var(--clr-pry-base-1);
+    width: 77%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    transition-timing-function: cubic-bezier(10,2,3,1);
+    transform: translateX(-50rem);
+    top: 0;
+    z-index: 0;
+    transition: 0.5s;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 14px;
+}
+
+#menu-mobile--wrapper li {
+    color: white
+}
+#menu-mobile--input {
+    display: none;
+}
+
+#menu-mobile--input:checked ~ #menu-mobile--wrapper {
+    transform: translateX(0rem);
+}
+
+.company-name {
+  font-weight: 800;
+  font-size: 2rem;
+}
+.company-name a {
+  text-decoration: none;
+  color: white;
+}
+
+
+#hamburguer {
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    right: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px
+}
+
+#hamburguer > hr {
+    margin: 0px;
+    width: 30px;
+    height: 2px;
+    border: none;
+    background: white;
+    transition: 0.5s;
+    z-index: 999;
+}
+
+#menu-mobile--input:checked ~ #hamburguer > hr {
+  background-color: #fff;
+}
+
+#menu-mobile--input:checked ~ #hamburguer > hr:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+#menu-mobile--input:checked ~ #hamburguer > hr:nth-child(2) {
+    opacity: 0;
+}
+#menu-mobile--input:checked ~ #hamburguer > hr:nth-child(3) {
+    transform: translateY(-14px) rotate(-45deg);
+}
+
+
+
+
+@media screen and (width >= 720px) {
+  .hamburguer {
+    display: none;
+  }
+  .menu--wrapper {
+    display: none;
+  }
+}
+
+
+
+</style>

@@ -1,0 +1,155 @@
+---
+import '@styles/global.css'
+const contactEmail = "atencionalcliente@plancitos.com"
+
+---
+
+<footer class="pd-mobile">
+    <nav class="w-max">
+        <section class="about-us--section">
+          <h2 class="quicksand-800">SERVICIO AL CLIENTE</h2>
+          <ul>
+            <li><a class="quicksand-400" href="/nosotros">Nosotros</a></li>
+          </ul>
+        </section>
+
+        <section class="contact--section">
+          <h2 class="quicksand-800">CONTACTANOS</h2>
+          <ul>
+            <li><a class="quicksand-400" href="/contacto">Quiero que me contacten</a></li>
+            <li><a class="quicksand-400" href="tel:+573133336464">+57 313 333 6464</a></li>
+            <li><a class="quicksand-400"href=`mailto:${contactEmail}`>{contactEmail}</a></li>
+          </ul>
+        </section>
+
+        <section class="terms-conditions--section">
+          <h2 class="quicksand-800">POLITICAS, TERMINOS Y<br class="break-line"> CONDICIONES</h2>
+          <ul>
+            <li><a class="quicksand-400" href="/terminos-y-condiciones">Terminos y Condiciones</a></li>
+          </ul>
+        </section>
+
+        <section class="follow-us--section">
+          <h2 class="quicksand-800">SÍGUENOS</h2>
+          <ul>
+            <li><img class="quicksand-400" src="/icons/fb-logo-svg.svg" alt="logo cliqueable de facebook"></li>
+            <li><img class="quicksand-400" src="/icons/insta-logo-svg-3.svg" alt="logo cliqueable de instagram"></li>
+            <li><img class="quicksand-400" src="/icons/tiktok-logo-svg.svg" alt="logo cliqueable de tiktok"></li>
+          </ul>
+        </section>
+      </nav>
+      <h3 class="quicksand-500">Copyright 2024, Skyline Technologies</h3>
+
+
+</footer>
+
+<style>
+
+  footer {
+      position: fixed;
+      bottom: 0px;
+      background: var(--clr-pry-base-1);
+      width: 100%;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+
+  }
+
+
+  section > h2 {
+    color: white;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+    margin-bottom: .5rem;
+  }
+
+  ul {
+    padding-left: 20px;
+    color: white;
+    margin: 4px;
+  }
+
+  li a {
+    color: white;
+    text-decoration: none;
+
+  }
+  .follow-us--section ul {
+    list-style: none;
+    display: flex;
+    gap: .5rem;
+    padding-left: 0px;
+  }
+
+  li img {
+    width: 25px;
+  }
+
+  .follow-us--section ul li:nth-child(2) img {
+    width: 27.5px;
+  }
+
+
+  h3 {
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    margin: 2.5rem 0rem 2rem;
+  }
+
+@media screen and (width >= 720px) {
+  nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 650px;
+    justify-content: center;
+
+  }
+
+  ul {
+    width: 67%;
+  }
+
+  section {
+    width: 210px;
+    align-items: flex-start;
+  }
+  section h2 {
+    align-self: left;
+  }
+  .contact--section h2 {
+    width: 180px;
+  }
+
+}
+
+
+@media screen and (width >= 1150px) {
+
+  footer {
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+  }
+  nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3.5rem;
+    max-width: 1300px;
+    
+  }
+
+  .break-line {
+    display: none;
+  }
+
+  .follow-us--section ul {
+    gap: .7rem;
+  }
+}
+
+    
+</style>

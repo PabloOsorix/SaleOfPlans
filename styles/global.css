@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+.quicksand-300 {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+.quicksand-400 {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.quicksand-500 {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.quicksand-600 {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.quicksand-700 {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.quicksand-800 {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+:root {
+    --media-tablet: 720px;
+    --media-desk: 1150px;
+
+    --clr-pry-base-1: #41B06E;
+    --clr-pry-base-2: #141E46;
+
+    --w-max: 1300px
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0px auto;
+
+}
+
+.w-max {
+    max-width: 1300px;
+    margin: auto;
+}
+
+.pd-mobile {
+    padding-left: 10px;
+    padding-right: 10px;
+}
