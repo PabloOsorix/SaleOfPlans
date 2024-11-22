@@ -1,7 +1,7 @@
 ---
 import '@styles/global.css'
 const contactEmail = "atencionalcliente@plancitos.com"
-
+const basePath = import.meta.env.BASE_URL;
 ---
 
 <footer class="pd-mobile">
@@ -9,14 +9,14 @@ const contactEmail = "atencionalcliente@plancitos.com"
         <section class="about-us--section">
           <h2 class="quicksand-800">SERVICIO AL CLIENTE</h2>
           <ul>
-            <li><a class="quicksand-400" href={Astro.url.pathname + "nosotros"}>Nosotros</a></li>
+            <li><a class="quicksand-400" href=`${basePath}nosotros`>Nosotros</a></li>
           </ul>
         </section>
 
         <section class="contact--section">
           <h2 class="quicksand-800">CONTACTANOS</h2>
           <ul>
-            <li><a class="quicksand-400" href={Astro.url.pathname + "contacto"}>Quiero que me contacten</a></li>
+            <li><a class="quicksand-400" href=`${basePath}contacto`>Quiero que me contacten</a></li>
             <li><a class="quicksand-400" href="tel:+573133336464">+57 313 333 6464</a></li>
             <li><a class="quicksand-400"href=`mailto:${contactEmail}`>{contactEmail}</a></li>
           </ul>
@@ -25,16 +25,16 @@ const contactEmail = "atencionalcliente@plancitos.com"
         <section class="terms-conditions--section">
           <h2 class="quicksand-800">POLITICAS, TERMINOS Y<br class="break-line"> CONDICIONES</h2>
           <ul>
-            <li><a class="quicksand-400" href={Astro.url.pathname + "terminos-y-condiciones"}>Terminos y Condiciones</a></li>
+            <li><a class="quicksand-400" href=`${basePath}terminos-y-condiciones`>Terminos y Condiciones</a></li>
           </ul>
         </section>
 
         <section class="follow-us--section">
           <h2 class="quicksand-800">SÍGUENOS</h2>
           <ul>
-            <li><img class="quicksand-400" src={Astro.url.pathname + "icons/fb-logo-svg.svg"} alt="logo cliqueable de facebook"></li>
-            <li><img class="quicksand-400" src={Astro.url.pathname + "icons/insta-logo-svg-3.svg"} alt="logo cliqueable de instagram"></li>
-            <li><img class="quicksand-400" src={Astro.url.pathname + "icons/tiktok-logo-svg.svg"} alt="logo cliqueable de tiktok"></li>
+            <li><img class="quicksand-400" src=`${basePath}icons/fb-logo-svg.svg` alt="logo cliqueable de facebook"></li>
+            <li><img class="quicksand-400" src=`${basePath}icons/insta-logo-svg-3.svg` alt="logo cliqueable de instagram"></li>
+            <li><img class="quicksand-400" src=`${basePath}icons/tiktok-logo-svg.svg` alt="logo cliqueable de tiktok"></li>
           </ul>
         </section>
       </nav>

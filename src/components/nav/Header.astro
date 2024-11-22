@@ -4,6 +4,7 @@ import Navigation from "./Navigation.astro";
 import HamburguerMenu from "./HamburguerMenu.astro";
 const logo = ""
 const companyName = "PLANCITOS"
+const basePath = import.meta.env.BASE_URL;
 ---
 
 
@@ -12,7 +13,7 @@ const companyName = "PLANCITOS"
   <div class="w-max header-wrapper">
     <div class="logo--wrapper">
       <img alt="">
-      <span class="quicksand-800 company-name"><a href={Astro.url.pathname}>{companyName}</a></span>
+      <span class="quicksand-800 company-name"><a href=`${basePath}`>{companyName}</a></span>
     </div>
     
     <Navigation isDesktop="true"></Navigation>
@@ -21,9 +22,6 @@ const companyName = "PLANCITOS"
 
 </header>
 
-<script>
-  import '@scripts/menu.js'
-</script>
 
 <style>
   header {
