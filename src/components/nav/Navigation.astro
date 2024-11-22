@@ -7,16 +7,16 @@ const { isDesktop, isMobile } = Astro.props
     <div class="menu--wrapper">
       <ul class="menu--list">
         <li class="menu--item">
-          <a href={Astro.url.pathname + "/planes"} class="quicksand-800" >Planes</a>
+          <a href={Astro.url.pathname + "planes"} class="quicksand-800" >Planes</a>
         </li>
         <li class="menu--item">
-          <a href="/SaleOfPlans/contacto" class="quicksand-800">Contactanos</a>
+          <a href={Astro.url.pathname +" contacto"} class="quicksand-800">Contactanos</a>
         </li>
         <li class="menu--item">
-          <a href="/SaleOfPlans/blog" class="quicksand-800">Blog</a>
+          <a href={Astro.url.pathname + "blog"} class="quicksand-800">Blog</a>
         </li>
         <li class="menu--item">
-          <a href="/SaleOfPlans/nosotros" class="quicksand-800">Nosotros</a>
+          <a href={Astro.url.pathname + "nosotros"} class="quicksand-800">Nosotros</a>
         </li>
       </ul>
     </div>
