@@ -6,36 +6,44 @@ const basePath = import.meta.env.BASE_URL;
 
 <footer class="pd-mobile">
     <nav class="w-max">
-        <section class="about-us--section">
-          <h2 class="quicksand-800">SERVICIO AL CLIENTE</h2>
-          <ul>
-            <li><a class="quicksand-400" href=`${basePath}nosotros`>Nosotros</a></li>
-          </ul>
+        <section class="client-service--section">
+          <div class="wrapper">
+            <h2 class="quicksand-800">SERVICIO AL CLIENTE</h2>
+            <ul>
+              <li><a class="quicksand-400" href=`${basePath}nosotros`>Nosotros</a></li>
+            </ul>
+          </div>
         </section>
 
         <section class="contact--section">
-          <h2 class="quicksand-800">CONTACTANOS</h2>
-          <ul>
-            <li><a class="quicksand-400" href=`${basePath}contacto`>Quiero que me contacten</a></li>
-            <li><a class="quicksand-400" href="tel:+573133336464">+57 313 333 6464</a></li>
-            <li><a class="quicksand-400"href=`mailto:${contactEmail}`>{contactEmail}</a></li>
-          </ul>
+          <div class="wrapper">
+            <h2 class="quicksand-800">CONTACTANOS</h2>
+            <ul>
+              <li><a class="quicksand-400" href=`${basePath}contacto`>Quiero que me contacten</a></li>
+              <li><a class="quicksand-400" href="tel:+573133336464">+57 313 333 6464</a></li>
+              <li><a class="quicksand-400"href=`mailto:${contactEmail}`>{contactEmail}</a></li>
+            </ul>
+          </div>
         </section>
 
         <section class="terms-conditions--section">
-          <h2 class="quicksand-800">POLITICAS, TERMINOS Y<br class="break-line"> CONDICIONES</h2>
-          <ul>
-            <li><a class="quicksand-400" href=`${basePath}terminos-y-condiciones`>Terminos y Condiciones</a></li>
-          </ul>
+          <div class="wrapper">
+            <h2 class="quicksand-800">POLITICAS, TERMINOS Y<br class="break-line"> CONDICIONES</h2>
+            <ul>
+              <li><a class="quicksand-400" href=`${basePath}terminos-y-condiciones`>Terminos y Condiciones</a></li>
+            </ul>
+          </div>
         </section>
 
         <section class="follow-us--section">
-          <h2 class="quicksand-800">SÍGUENOS</h2>
-          <ul>
-            <li><img class="quicksand-400" src=`${basePath}icons/fb-logo-svg.svg` alt="logo cliqueable de facebook"></li>
-            <li><img class="quicksand-400" src=`${basePath}icons/insta-logo-svg-3.svg` alt="logo cliqueable de instagram"></li>
-            <li><img class="quicksand-400" src=`${basePath}icons/tiktok-logo-svg.svg` alt="logo cliqueable de tiktok"></li>
-          </ul>
+          <div class="wrapper">
+            <h2 class="quicksand-800">SÍGUENOS</h2>
+            <ul>
+              <li><img class="quicksand-400" src=`${basePath}icons/fb-logo-svg.svg` alt="logo cliqueable de facebook"></li>
+              <li><img class="quicksand-400" src=`${basePath}icons/insta-logo-svg-3.svg` alt="logo cliqueable de instagram"></li>
+              <li><img class="quicksand-400" src=`${basePath}icons/tiktok-logo-svg.svg` alt="logo cliqueable de tiktok"></li>
+            </ul>
+          </div>
         </section>
       </nav>
       <h3 class="quicksand-500">Copyright 2024, Skyline Technologies</h3>
@@ -46,10 +54,14 @@ const basePath = import.meta.env.BASE_URL;
 <style>
 
   footer {
-      position: fixed;
+      padding-top: 20px;
       bottom: 0px;
       background: var(--clr-pry-base-1);
       width: 100%;
+  }
+
+  nav {
+    display: grid;
   }
 
   section {
@@ -59,12 +71,14 @@ const basePath = import.meta.env.BASE_URL;
   }
 
 
-  section > h2 {
+  div > h2 {
     color: white;
     font-size: 1.1rem;
     margin-top: 2rem;
     margin-bottom: .5rem;
   }
+
+
 
   ul {
     padding-left: 20px;
@@ -77,11 +91,28 @@ const basePath = import.meta.env.BASE_URL;
     text-decoration: none;
 
   }
+
+  .client-service--section {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .contact--section {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .terms-conditions--section {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
   .follow-us--section ul {
     list-style: none;
     display: flex;
     gap: .5rem;
     padding-left: 0px;
+
   }
 
   li img {
@@ -93,6 +124,7 @@ const basePath = import.meta.env.BASE_URL;
   }
 
 
+
   h3 {
     color: white;
     font-size: 1rem;
@@ -100,13 +132,32 @@ const basePath = import.meta.env.BASE_URL;
     margin: 2.5rem 0rem 2rem;
   }
 
+@media screen and (width >= 370px) {
+  nav {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+}
+
+
 @media screen and (width >= 720px) {
+  
   nav {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 650px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-row: repeat(2, 1fr);
+    max-width: 750px;
     justify-content: center;
 
+  }
+
+  div.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   ul {
@@ -114,8 +165,8 @@ const basePath = import.meta.env.BASE_URL;
   }
 
   section {
-    width: 210px;
-    align-items: flex-start;
+    width: 100%;
+    align-items: center;
   }
   section h2 {
     align-self: left;
@@ -124,31 +175,50 @@ const basePath = import.meta.env.BASE_URL;
     width: 180px;
   }
 
+  .terms-conditions--section {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .follow-us--section ul {
+    padding-left: 0px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 20px;
+
+  }
+
 }
 
 
 @media screen and (width >= 1150px) {
-
-  footer {
-    justify-content: center;
-    flex-direction: column;
-    display: flex;
-  }
   nav {
-    display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 3.5rem;
+    grid-template-rows: repeat(1, 1fr);
     max-width: 1300px;
-    
+  }
+  
+  .client-service--section h2,
+  .terms-conditions--section h2,
+  .contact--section h2 {
+    width: 204px;
   }
 
-  .break-line {
-    display: none;
+
+  .contact--section {
+    grid-column: 2;
+    grid-row: 1;
   }
 
-  .follow-us--section ul {
-    gap: .7rem;
+  .terms-conditions--section {
+    grid-column: 3;
+    grid-row: 1;
   }
+  .follow-us--section {
+    grid-column: 4;
+    grid-row: 1;
+  }
+
 }
 
     
