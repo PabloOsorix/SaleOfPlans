@@ -53,10 +53,19 @@
 * {
     box-sizing: border-box;
 }
+html, body {
+    margin: 0px;
+    height: 100%;
+}
 
 body {
     margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+}
 
+main {
+    flex: 1;
 }
 
 .w-max {
