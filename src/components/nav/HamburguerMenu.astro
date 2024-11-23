@@ -12,7 +12,7 @@ const { companyName } = Astro.props
     <hr></hr>
 </label>
 <div id="menu-mobile--wrapper">
-    <span class="quicksand-800 company-name"><a href={Astro.url.pathname}>{companyName}</a></span>
+    <span class="company-name"><a href={Astro.url.pathname}>{companyName}</a></span>
     <Navigation isMobile="true"></Navigation>
 </div>
 </section>
@@ -42,7 +42,7 @@ const { companyName } = Astro.props
     transition-timing-function: cubic-bezier(10,2,3,1);
     transform: translateX(-50rem);
     top: 0;
-    z-index: 0;
+    z-index: 999;
     transition: 0.5s;
     display: flex;
     justify-content: flex-start;
@@ -63,6 +63,7 @@ const { companyName } = Astro.props
 }
 
 .company-name {
+  font-family: var(--ff-base);
   font-weight: 800;
   font-size: 2rem;
 }

@@ -13,7 +13,7 @@ const basePath = import.meta.env.BASE_URL;
   <div class="w-max header-wrapper">
     <div class="logo--wrapper">
       <img alt="">
-      <span class="quicksand-800 company-name"><a href=`${basePath}`>{companyName}</a></span>
+      <span class="company-name"><a href=`${basePath}`>{companyName}</a></span>
     </div>
     
     <Navigation isDesktop="true"></Navigation>
@@ -39,6 +39,7 @@ const basePath = import.meta.env.BASE_URL;
   }
 
   .company-name {
+    font-family: var(--ff-base);
     font-weight: 800;
     font-size: 2rem;
   }

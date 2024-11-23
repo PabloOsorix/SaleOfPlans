@@ -7,16 +7,16 @@ const basePath = import.meta.env.BASE_URL;
     <div class="menu--wrapper">
       <ul class="menu--list">
         <li class="menu--item">
-          <a href=`${basePath}planes` class="quicksand-800">Planes</a>
+          <a href=`${basePath}planes`>Planes</a>
         </li>
         <li class="menu--item">
-          <a href=`${basePath}contacto` class="quicksand-800">Contactanos</a>
+          <a href=`${basePath}contacto`>Contactanos</a>
         </li>
         <li class="menu--item">
-          <a href=`${basePath}blog` class="quicksand-800">Blog</a>
+          <a href=`${basePath}blog`>Blog</a>
         </li>
         <li class="menu--item">
-          <a href=`${basePath}nosotros` class="quicksand-800">Nosotros</a>
+          <a href=`${basePath}nosotros`>Nosotros</a>
         </li>
       </ul>
     </div>
@@ -55,9 +55,11 @@ const basePath = import.meta.env.BASE_URL;
   }
 
   .menu--item a {
-      text-decoration: none;
-      color: white;
-      font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
+    font-family: var(--ff-base);
+    font-weight: 800;
+    font-size: 1.2rem;
   }
 
 
