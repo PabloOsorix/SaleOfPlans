@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-
+import path from 'path';
 
 import compress from 'astro-compress';
 
