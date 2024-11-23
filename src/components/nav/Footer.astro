@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets'
 import '@styles/global.css'
 const contactEmail = "atencionalcliente@plancitos.com"
 const basePath = import.meta.env.BASE_URL;
@@ -8,40 +9,40 @@ const basePath = import.meta.env.BASE_URL;
     <nav class="w-max">
         <section class="client-service--section">
           <div class="wrapper">
-            <h2 class="quicksand-800">SERVICIO AL CLIENTE</h2>
+            <h2 class="">SERVICIO AL CLIENTE</h2>
             <ul>
-              <li><a class="quicksand-400" href=`${basePath}nosotros`>Nosotros</a></li>
+              <li><a class="" href=`${basePath}nosotros`>Nosotros</a></li>
             </ul>
           </div>
         </section>
 
         <section class="contact--section">
           <div class="wrapper">
-            <h2 class="quicksand-800">CONTACTANOS</h2>
+            <h2 class="">CONTACTANOS</h2>
             <ul>
-              <li><a class="quicksand-400" href=`${basePath}contacto`>Quiero que me contacten</a></li>
-              <li><a class="quicksand-400" href="tel:+573133336464">+57 313 333 6464</a></li>
-              <li><a class="quicksand-400"href=`mailto:${contactEmail}`>{contactEmail}</a></li>
+              <li><a class="" href=`${basePath}contacto`>Quiero que me contacten</a></li>
+              <li><a class="" href="tel:+573133336464">+57 313 333 6464</a></li>
+              <li><a class="" href=`mailto:${contactEmail}`>{contactEmail}</a></li>
             </ul>
           </div>
         </section>
 
         <section class="terms-conditions--section">
           <div class="wrapper">
-            <h2 class="quicksand-800">POLITICAS, TERMINOS Y<br class="break-line"> CONDICIONES</h2>
+            <h2 class="">POLITICAS, TERMINOS Y<br class="break-line"> CONDICIONES</h2>
             <ul>
-              <li><a class="quicksand-400" href=`${basePath}terminos-y-condiciones`>Terminos y Condiciones</a></li>
+              <li><a class="" href=`${basePath}terminos-y-condiciones`>Terminos y Condiciones</a></li>
             </ul>
           </div>
         </section>
 
         <section class="follow-us--section">
           <div class="wrapper">
-            <h2 class="quicksand-800">SÍGUENOS</h2>
+            <h2 class="">SÍGUENOS</h2>
             <ul>
-              <li><img class="quicksand-400" src=`${basePath}icons/fb-logo-svg.svg` alt="logo cliqueable de facebook"></li>
-              <li><img class="quicksand-400" src=`${basePath}icons/insta-logo-svg-3.svg` alt="logo cliqueable de instagram"></li>
-              <li><img class="quicksand-400" src=`${basePath}icons/tiktok-logo-svg.svg` alt="logo cliqueable de tiktok"></li>
+              <li><Image src=`${basePath}icons/fb-logo-svg.svg` alt="logo cliqueable de facebook" width="25" height="25"/></li>
+              <li><Image src=`${basePath}icons/insta-logo-svg-3.svg` alt="logo cliqueable de instagram" width="27.5" height="25"/></li>
+              <li><Image src=`${basePath}icons/tiktok-logo-svg.svg` alt="logo cliqueable de tiktok" width="25" height="25"/></li>
             </ul>
           </div>
         </section>
@@ -76,6 +77,8 @@ const basePath = import.meta.env.BASE_URL;
     font-size: 1.1rem;
     margin-top: 2rem;
     margin-bottom: .5rem;
+    font-family: var(--ff-base);
+    font-weight: 800;
   }
 
 
@@ -89,6 +92,8 @@ const basePath = import.meta.env.BASE_URL;
   li a {
     color: white;
     text-decoration: none;
+    font-family: var(--ff-base);
+    font-weight: 400;
 
   }
 
