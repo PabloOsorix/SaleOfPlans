@@ -1,0 +1,17 @@
+---
+import BaseCarousel from "@components/carousel/base/BaseCarousel.astro"
+import BasicSlide from "@components/carousel/basic/BasicSlide.astro"
+
+const slides = [
+ {
+  image: "banners/home/Los-naranjos-webp.webp",
+  title: "Los naranjos",
+  description: "jejejej"
+ },
+]
+---
+
+
+<BaseCarousel>
+    <BasicSlide slides={slides}></BasicSlide>
+</BaseCarousel>

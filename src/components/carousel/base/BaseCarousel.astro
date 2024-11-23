@@ -1,0 +1,65 @@
+---
+import '@splidejs/splide/css'; // Import Splide's CSS
+---
+
+<div id="splide" class="splide">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <slot/>
+    </ul>
+  </div>
+</div>
+
+<script>
+  import Splide from '@splidejs/splide';
+
+  // Initialize Splide
+  document.addEventListener('DOMContentLoaded', () => {
+    new Splide('#splide', {
+      type: 'loop',       // Loop through slides
+      autoplay: false,     // Enable auto-play
+      interval: 7000,     // 3 seconds between slides
+      perPage: 1,         // Show 1 slide at a time
+      pagination: true,   // Show pagination dots
+      arrows: true,       // Show navigation arrows
+    }).mount();
+  });
+</script>
+
+<style>
+
+  .spide {
+    height: 500px;
+  }
+
+:global(.splide__arrow--next) {
+    border-radius: 50% 0px 0px 50%;
+    right: 0px;
+    width: 2.5em;
+    height: 2.5em;
+  }
+
+  :global(.splide__arrow--prev) {
+    border-radius: 0% 50% 50% 0%;
+    left: 0px;
+    width: 2.5em;
+    height: 2.5em;
+  }
+
+
+  @media screen and (width >= 1150px) {
+  
+  :global(.splide__arrow--next) {
+    width: 3em;
+    height: 3em;
+  }
+
+  :global(.splide__arrow--prev) {
+    width: 3em;
+    height: 3em;
+  }
+
+}
+</style>
+
+

@@ -1,0 +1,47 @@
+---
+import BaseOverlayContent from "@components/carousel/base/BaseOverlayContent.astro";
+const {
+    title,
+    description
+} = Astro.props
+---
+
+
+
+<BaseOverlayContent overlayClass="overlay" wrapperClass="wrapper">
+    <h2 class="title">{title}</h2>
+    <p>{description}</p>
+</BaseOverlayContent>
+
+
+<style>
+  :global(.overlay) {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 100%
+  }
+
+
+  .title {
+    color: white;
+  }
+
+@media screen and (width >= 1150px) {
+    :global(.overlay) {
+      width: 50%;
+    }
+    
+    :global(.overlay > .wrapper) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      bottom: 0px;
+    }
+  }
+
+
+</style>

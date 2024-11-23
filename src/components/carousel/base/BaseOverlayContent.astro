@@ -1,0 +1,12 @@
+---
+const {
+  overlayClass = "overlay",
+  wrapperClass = "wrapper"
+} = Astro.props
+---
+
+<div class={overlayClass}>
+  <div class={wrapperClass}>
+    <slot/>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import BasicOverlayContent from '@components/carousel/basic/BasicOverlayContent.astro';
+const basePath = import.meta.env.BASE_URL;
+
+
+type Slide = {
+  image: string;
+  title: string;
+  description: string;
+};
+
+interface Props {
+  slides: Slide[];
+}
+
+const { slides }: Props = Astro.props;
+---
+
+
+{ slides.map((slide, index) =>
+  <li class="splide__slide">
+    <Image src={basePath + slide.image} alt={"Slide" + index}  width="1360" height="765" loading="eager"/>
+    {/* Put your overlayContentComponent Here exp:*/}
+    {/* <BasicOverlayContent title={slide.title} description={slide.description}></BasicOverlayContent>*/}
+  </li>
+)}
+
+
+<style>
+
+  .splide__slide,
+  .splide__slide img {
+    height: 500px;
+  }
+
+
+  @media screen and (width >= 1150px) {
+    
+  .splide {
+    max-heigth: 500px;
+  }
+
+  .splide__slide,
+  .splide__slide img {
+    height: 500px;
+    width: 100%;
+  }
+
+
+
+  }
+</style>

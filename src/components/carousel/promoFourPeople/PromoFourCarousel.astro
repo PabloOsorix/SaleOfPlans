@@ -1,0 +1,22 @@
+---
+import BaseCarousel from "@components/carousel/base/BaseCarousel.astro"
+import PromoFourSlide from "@components/carousel/promoFourPeople/PromoFourSlide.astro"
+
+const slides = [
+ {
+  image: "banners/home/Los-naranjos-webp.webp",
+  price: 350000,
+  titleIsBlue: false
+ },
+ {
+    image: "banners/home/Hotel-Grand-Dubai-1.webp",
+    price: 350000,
+    titleIsBlue: true
+ }
+]
+---
+
+
+<BaseCarousel>
+    <PromoFourSlide slides={slides}></PromoFourSlide>
+</BaseCarousel>
