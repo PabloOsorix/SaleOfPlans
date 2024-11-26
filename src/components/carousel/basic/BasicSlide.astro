@@ -6,8 +6,8 @@ const basePath = import.meta.env.BASE_URL;
 
 type Slide = {
   image: string;
-  title: string;
-  description: string;
+  /*title: string;
+  description: string;*/
 };
 
 interface Props {
@@ -21,7 +21,6 @@ const { slides }: Props = Astro.props;
 { slides.map((slide, index) =>
   <li class="splide__slide">
     <Image src={basePath + slide.image} alt={"Slide" + index}  width="1360" height="765" loading="eager"/>
-    <BasicOverlayContent title={slide.title} description={slide.description}></BasicOverlayContent>
   </li>
 )}
 
