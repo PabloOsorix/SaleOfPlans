@@ -1,15 +1,18 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import PromoFourCarousel from "@components/carousel/promoFourPeople/PromoFourCarousel.astro"
-import BasicPromoCarousel from "@components/carousel/basic/BasicPromoCarousel.astro";
-
+import BasicBanner from "@components/banner/BasicBanner.astro";
+import PromoCard from "@components/cards/promoCards/PromoCard.astro";
+const mainBanner = "banners/home/Hotel-Grand-Dubai-1.webp"
 ---
 
 <BaseLayout title="Home">
 
-  <BasicPromoCarousel>
+  <BasicBanner image={mainBanner}>
+  </BasicBanner>
 
-  </BasicPromoCarousel>
+  <PromoCard>
+
+  </PromoCard>
 
 </BaseLayout>
 
