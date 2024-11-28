@@ -11,13 +11,28 @@ const { companyName } = Astro.props
     <hr></hr>
     <hr></hr>
 </label>
+
+<div class="close-menu--wrapper"></div>
 <div id="menu-mobile--wrapper">
     <span class="company-name"><a href={Astro.url.pathname}>{companyName}</a></span>
     <Navigation isMobile="true"></Navigation>
 </div>
 </section>
 
-</body>
+<script>
+  import {$, $$} from "src/utils/selectors.js"
+
+  const menuStatus = $("#menu-mobile--input");
+  const closeMenuArea = $(".close-menu--wrapper");
+  
+  closeMenuArea.addEventListener("click", (event) => {
+    if (menuStatus.checked) {
+      menuStatus.checked = false;
+    }
+
+  })
+</script>
+
 
 <style>
 /* nav styles */
@@ -33,6 +48,19 @@ const { companyName } = Astro.props
 .hamburguer-wrapper {
   cursor: pointer;
 }
+
+.close-menu--wrapper {
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  right: 0px;
+  top: 5.3rem;
+  -webkit-transition: background .5s ease-out;
+  -moz-transition: background .5s ease-out;
+  -o-transition: background .5s ease-out;
+  transition: background .5s ease-out;
+}
+
 #menu-mobile--wrapper {
     background: var(--clr-pry-base-1);
     width: 77%;
@@ -60,6 +88,12 @@ const { companyName } = Astro.props
 
 #menu-mobile--input:checked ~ #menu-mobile--wrapper {
     transform: translateX(0rem);
+}
+
+#menu-mobile--input:checked ~ .close-menu--wrapper {
+  background: #0000008c;
+  z-index: 998;
+  
 }
 
 .company-name {
