@@ -1,0 +1,33 @@
+---
+import Image from "astro/components/Image.astro";
+const basePath = import.meta.env.BASE_URL;
+const { image } = Astro.props;
+---
+
+<section class="banner--section">
+  <Image
+    src=`${basePath}${image}`
+    alt=""
+    width="1600"
+    height="600"
+    loading="eager"
+  />
+</section>
+
+<style>
+  .banner--section {
+    width: 100%;
+  }
+
+  .banner--section img {
+    width: 100%;
+    max-height: 500px;
+  }
+
+  @media screen and (width >= 720px) {
+    .banner--section img {
+      width: 100%;
+      max-height: 500px;
+    }
+  }
+</style>
