@@ -1,0 +1,25 @@
+---
+import Image from "astro/components/Image.astro"
+
+const {
+    imagePath,
+    class:className,
+    description, ...rest 
+} = Astro.props
+---
+
+
+<li class={"item" + " " + className} {...rest}>
+    <span>
+      <Image
+      src={imagePath}
+      alt=""
+      width={30}
+      height={25}
+      loading="eager"
+    />
+    </span>
+    <span>
+      {description}
+    </span>
+  </li>
