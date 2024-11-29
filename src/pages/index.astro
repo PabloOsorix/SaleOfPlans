@@ -2,20 +2,50 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import BasicBanner from "@components/banner/BasicBanner.astro";
 import PromoCard from "@components/cards/promoCards/PromoCard.astro";
-const mainBanner = "banners/home/Hotel-Grand-Dubai-1.webp"
+const mainBanner = "banners/home/Hotel-Grand-Dubai-1.webp";
 ---
 
 <BaseLayout title="Home">
-
-  <BasicBanner image={mainBanner}>
+  <BasicBanner image="">
+    <span class="title__cont">
+      <h2 class="title">Plancitos.com</h2>
+    </span>
   </BasicBanner>
 
-  <PromoCard>
-
-  </PromoCard>
-
+  <PromoCard />
 </BaseLayout>
 
 <style>
+
+  span.title__cont {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .title {
+    color: white;
+    font-size: 3rem;
+    font-family: var(--ff-base);
+    font-weight: 700;
+    margin: 0px;
+  }
+
+  @media screen and (width >= 720px) {
+
+  }
+
+  @media screen and (width >= 1150px) {
+
+    span.title__cont {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    
+    .title {
+      color: white;
+      font-size: 5rem;
+    }
+  }
+
 
 </style>
