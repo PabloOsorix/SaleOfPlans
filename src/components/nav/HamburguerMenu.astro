@@ -2,6 +2,7 @@
 import '@styles/global.css'
 import Navigation from './Navigation.astro'
 const { companyName } = Astro.props
+const basePath = import.meta.env.BASE_URL;
 ---
 
 <section class="menu--wrapper">
@@ -14,7 +15,7 @@ const { companyName } = Astro.props
 
 <div class="close-menu--wrapper"></div>
 <div id="menu-mobile--wrapper">
-    <span class="company-name"><a href={Astro.url.pathname}>{companyName}</a></span>
+    <span class="company-name"><a href=`${basePath}`>{companyName}</a></span>
     <Navigation isMobile="true"></Navigation>
 </div>
 </section>
@@ -63,7 +64,7 @@ const { companyName } = Astro.props
 
 #menu-mobile--wrapper {
     background: var(--clr-pry-base-1);
-    width: 77%;
+    width: 65%;
     height: 100%;
     position: fixed;
     left: 0;
