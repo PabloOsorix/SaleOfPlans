@@ -17,6 +17,7 @@ interface Props {
   price: number;
   discountPercent: number;
   discountPrice: number;
+  buttonRedirect: string;
   class: string;
   legalRestriction: string;
   benefits: Benefit[];
@@ -29,6 +30,7 @@ const {
   price,
   discountPercent,
   discountPrice,
+  buttonRedirect,
   class:className,
   benefits,
   legalRestriction,
@@ -83,7 +85,7 @@ console.log(benefits)
         </section>
         
         <span class="button__wrapper">
-          <a href="https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar%20Pro&type=phone_number&app_absent=0"
+          <a href={buttonRedirect}
             class="button"
             target="_blank"
             rel="noopener noreferrer"
