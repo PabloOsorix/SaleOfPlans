@@ -1,8 +1,49 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import BasicBanner from "@components/banner/BasicBanner.astro";
-import PromoCard from "@components/cards/promoCards/PromoCard.astro";
+import PromoListCard from "@components/cards/promoCards/PromoListCard.astro";
+import PromoItemCard from "@components/cards/promoCards/PromoItemCard.astro";
 const mainBanner = "banners/home/Hotel-Grand-Dubai-1.webp";
+
+
+const family = [
+  {
+    icon: "icons/icon-bed.svg",
+    description: "2 Días 1 Noche"
+  },
+  {
+    icon: "icons/icon-person.svg",
+    description: "4 Personas"
+  },
+  {
+    icon: "icons/icon-breakfast.svg",
+    description: "4 Desayunos"
+  },
+  {
+    icon: "icons/icon-lunch.svg",
+    description: "4 Almuerzos"
+  },
+]
+
+const friends = [
+{
+    icon: "icons/icon-bed.svg",
+    description: "2 Días 1 Noche"
+  },
+  {
+    icon: "icons/icon-person.svg",
+    description: "8 Personas"
+  },
+  {
+    icon: "icons/icon-breakfast.svg",
+    description: "8 Desayunos"
+  },
+  {
+    icon: "icons/icon-lunch.svg",
+    description: "8 Almuerzos"
+  },
+]
+
 ---
 
 <BaseLayout title="Home">
@@ -11,8 +52,51 @@ const mainBanner = "banners/home/Hotel-Grand-Dubai-1.webp";
       <h2 class="title">Plancitos.com</h2>
     </span>
   </BasicBanner>
+  
+  <PromoListCard>
+    <PromoItemCard
+      class=""
+      title={"Plancito Familiar Pro"}
+      category={"Express"}
+      recommendation={4}
+      price={350000}
+      discountPercent={12}
+      discountPrice={400000}
+      legalRestriction="*Aplica fines de semana sin festivo."
+      benefits={family}
 
-  <PromoCard />
+      >
+    </PromoItemCard>
+
+    <PromoItemCard
+      class=""
+      title={"Plancito Familiar"}
+      category={"Express"}
+      recommendation={3.5}
+      price={300000}
+      discountPercent={10}
+      discountPrice={330000}
+      benefits={family}
+      legalRestriction="*Aplica fines de semana sin festivo."
+    >
+    </PromoItemCard>
+
+
+    <PromoItemCard
+      class=""
+      title={"Plancito Amigos"}
+      category={"Express"}
+      recommendation={3.5}
+      price={620000}
+      discountPercent={11}
+      discountPrice={700000}
+      benefits={friends}
+      legalRestriction="*Aplica fines de semana sin festivo."
+    >
+    </PromoItemCard>
+
+  </PromoListCard>
+  
 </BaseLayout>
 
 <style>

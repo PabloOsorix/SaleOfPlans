@@ -10,7 +10,9 @@
       "@pages/*": ["src/pages/*"],
       "@mocks/*": ["src/mocks/*"],
       "@scripts/*": ["src/scripts/*"],
+      "@utils/*": ["src/utils/*"],
       "@public/*": ["public/*"],
+      "@data/*": ["data/*"]
     }
   }
 }
