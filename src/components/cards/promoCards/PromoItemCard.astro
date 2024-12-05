@@ -158,7 +158,8 @@ console.log(benefits)
 
 promo-item-card {
   margin: 22px 0px;
-  max-width: 350px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .wrapper {
@@ -172,8 +173,9 @@ promo-item-card {
   }
 
   .content {
-    width: 85%;
+    width: 75%;
     margin: auto;
+    max-width: 251px;
   }
 
   .category {
@@ -196,7 +198,7 @@ promo-item-card {
     color: var(--system-clr-primaryText);
     font-family: var(--ff-base);
     font-weight: 700;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-bottom: 0px;
   }
   .recommendation {
@@ -255,7 +257,7 @@ promo-item-card {
     color: var(--system-clr-primaryText);
     margin-top: 25px;
     margin-bottom: 0px;
-    font-size: 2.4rem;
+    font-size: 1.9rem;
     font-weight: 700;
   }
 
@@ -278,11 +280,11 @@ promo-item-card {
     padding: 1px 5px;
   }
 
-  p.amount {
+  .discount__wrapper p.amount {
     color: #C1C5CB;
     text-decoration: line-through;
     margin: 0px;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 300;
     padding-right: 5px;
   }
@@ -314,20 +316,20 @@ promo-item-card {
     margin-top: 10px;
     color: var(--system-clr-primaryText);
     font-family: var(--ff-base);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 400;
     text-align: center;
     width: 100%;
   }
 
   section.benefits {
-    margin-top: 45px;
+    margin-top: 35px;
     color: var(--system-clr-primaryText);
   }
 
   .benefits ul.list {
     list-style: none;
-    padding-left: 11px;
+    padding-left: 0px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -362,4 +364,19 @@ promo-item-card {
     font-weight: 500;
     
   }
+
+@media screen and (width >= 720px) {
+  h2.price__amount { 
+    font-size: 2.3rem;
+  }
+
+  .discount__wrapper p.amount {
+    font-size: 1.8rem;
+  }
+  
+  .legal,
+  .apply-terms {
+    font-size: 0.9rem;
+  }
+}
 </style>
