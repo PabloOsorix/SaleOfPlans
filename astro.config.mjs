@@ -8,6 +8,7 @@ import compress from 'astro-compress';
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/SaleOfPlans/' : '/',
   integrations: [compress()],
+  markdown: { mode: 'mdx' },
   vite: {
     ssr: {
       external: ['@splidejs/splide'],
