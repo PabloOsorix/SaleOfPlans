@@ -5,13 +5,17 @@ const { image } = Astro.props;
 ---
 
 <section class="banner--section">
-  <Image
-    src=`${basePath}${image}`
-    alt=""
-    width="1600"
-    height="600"
-    loading="eager"
-  />
+  { image && image !== "" ?
+    <Image
+      src=`${basePath}${image}`
+      alt=""
+      width="1600"
+      height="600"
+      loading="eager"
+    />
+    : null
+  }
+
   <section class="overay__container">
     <div class="content w-max">
       <slot />
@@ -29,7 +33,9 @@ const { image } = Astro.props;
     width: 100%;
     background-color: var(--clr-primaryBackground);
     position: relative;
+    min-height: var(--max-banner-height);
     max-height: var(--max-banner-height);
+
   }
 
   .banner--section img {
@@ -45,6 +51,7 @@ const { image } = Astro.props;
     width: 100%;
     height: 100%;
   }
+  
   .content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -56,7 +63,7 @@ const { image } = Astro.props;
   @media screen and (width >= 720px) {
     .banner--section {
       width: 100%;
-      background-color: var(--clr-pry-base-1);
+      background-color: var(--clr-primaryBackground);
       position: relative;
       max-height: var(--max-banner-height);
     }
