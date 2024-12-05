@@ -1,0 +1,365 @@
+---
+import "@styles/global.css"
+import { generateRandomID } from "@utils/randomId.js";
+import { formatPriceToCOP } from "@utils/currency";
+import Image from "astro/components/Image.astro";
+const basePath = import.meta.env.BASE_URL;
+
+type Benefit = {
+  icon: string;
+  description: string;
+};
+
+interface Props {
+  category: string;
+  title: string;
+  recommendation: number;
+  price: number;
+  discountPercent: number;
+  discountPrice: number;
+  class: string;
+  legalRestriction: string;
+  benefits: Benefit[];
+}
+
+const {
+  category,
+  title,
+  recommendation,
+  price,
+  discountPercent,
+  discountPrice,
+  class:className,
+  benefits,
+  legalRestriction,
+  ...rest
+}: Props = Astro.props as Props;
+const sinteticID = generateRandomID()
+console.log(benefits)
+---
+
+<promo-item-card
+  class={"splide__slide" + " " + sinteticID}
+  data-recommendation={recommendation}
+  data-sintetic-id={sinteticID}
+  >
+  <li>
+    <div class="wrapper">
+      
+      <div class="category">
+        <p>{category}</p>
+      </div>
+
+      <div class="content">
+        <h2 class="title">{title}</h2>
+        
+        <section class="recommendation" >
+          <p>Recomendación:</p>
+          <div class="dot__wrapper">
+            <span class="dot">
+              <div class="half-circle"></div>
+            </span>
+            <span class="dot">
+              <div class="half-circle"></div>
+            </span>
+            <span class="dot">
+              <div class="half-circle"></div>
+            </span>
+            <span class="dot">
+              <div class="half-circle"></div>
+            </span>
+            <span class="dot">
+              <div class="half-circle"></div>
+            </span>
+          </div>
+        </section>
+
+        <section class="price">
+          <h2 class="price__amount">$ {formatPriceToCOP(price)} COP</h2>
+          <span class="discount__wrapper">
+            <p class="percentage">-{discountPercent}%</p>
+            <p class="amount">{formatPriceToCOP(discountPrice)} COP</p>
+          </span>
+        </section>
+        
+        <span class="button__wrapper">
+          <a href="https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar%20Pro&type=phone_number&app_absent=0"
+            class="button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            !Reserva ahora!
+          </a>
+      </span>
+      <span class="disclaimer">*El descuento aplica en pagos de contado.</span>
+
+      <section class="benefits">
+        <ul class="list">
+
+          { benefits?.length > 0 &&
+            benefits.map((element) => (
+              <li class="benefit-item">
+                <Image
+                src={basePath + element.icon}
+                alt=""
+                width={20}
+                height={20}
+                >
+                </Image>
+                <p class="description">{element.description}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="term-and-conditions">
+        <span class="legal">{legalRestriction}</span>
+        <span class="apply-terms">*Aplican terminos y condiciones</span>
+
+      </section>
+
+
+      </div>
+
+    </div>  
+
+  </li>
+</promo-item-card>
+
+
+<script>
+
+  import {calculateRecommendation} from "@scripts/recommendation.js"
+
+  class  PromoItemCard extends HTMLElement {
+    constructor() {
+      super();
+
+    }
+
+    connectedCallback() {
+      const recommendation = this.dataset.recommendation;
+      const sinteticID = this.dataset.sinteticId
+      calculateRecommendation(recommendation, sinteticID);
+    }
+    
+    disconnectedCallback() {
+    }
+  };
+
+  customElements.define('promo-item-card', PromoItemCard);
+
+
+</script>
+
+
+<style>
+
+promo-item-card {
+  margin: 22px 0px;
+  max-width: 350px;
+}
+
+.wrapper {
+    height: 70%;
+    background: white;
+    margin: 0px 10px;
+    border-radius: 5px;
+    border: 3px solid var(--clr-primaryBackground);
+    margin-top: 10%;
+    min-height: 500px;
+  }
+
+  .content {
+    width: 85%;
+    margin: auto;
+  }
+
+  .category {
+    background: var(--clr-primaryBackground);
+    padding: 7px 0px;
+  }
+
+  .category p {
+    margin: 0px;
+    color: white;
+    font-family: var(--ff-base);
+    border: inherit;
+    margin-left: 5px;
+    font-weight: 600;
+  }
+
+  .title {
+    text-align: center;
+    letter-spacing: -1px;
+    color: var(--system-clr-primaryText);
+    font-family: var(--ff-base);
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 0px;
+  }
+  .recommendation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .recommendation p {
+    
+    color: var(--system-clr-primaryText);
+    font-family: var(--ff-base);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0px;
+  }
+
+  .dot__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .dot {
+    height: 13px;
+    width: 13px;
+    background-color: var(--clr-primaryBackground);
+    border: 2px solid var(--clr-primaryBackground);
+    border-radius: 50%;
+    display: inline-block;
+    position: relative
+  }
+
+  .half-circle.active {
+    width: 50%; /* Ocupa la mitad del círculo */
+    height: 100%;
+    background-color: white; /* Color de la "media luna" */
+    position: absolute;
+    top: 0;
+    left: 50%; /* Alinea la media luna a la derecha */
+    border-top-right-radius: 50%; /* Ajusta los bordes */
+    border-bottom-right-radius: 50%; /* Ajusta los bordes */
+  }
+
+
+  .price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--ff-base);
+  }
+
+  h2.price__amount {  
+    color: var(--system-clr-primaryText);
+    margin-top: 25px;
+    margin-bottom: 0px;
+    font-size: 2.4rem;
+    font-weight: 700;
+  }
+
+  span.discount__wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: var(--ff-base);
+    font-weight: 500;
+    width: 100%;
+    gap: 5px;
+  }
+
+  p.percentage {
+    margin: 0px;
+    color: white;
+    font-weight: 600;
+    background-color: var(--system-primary-backgorund-2);
+    border-radius: 10px;
+    padding: 1px 5px;
+  }
+
+  p.amount {
+    color: #C1C5CB;
+    text-decoration: line-through;
+    margin: 0px;
+    font-size: 1.8rem;
+    font-weight: 300;
+    padding-right: 5px;
+  }
+
+  .button__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+  }
+
+  .button {
+    text-decoration: none;
+    color: white;
+    font-family: var(--ff-base);
+    font-size: 1.3rem;
+    font-weight: 600;
+    background: var(--clr-primaryBackground);
+    padding: 12px 0px;
+    width: 250px;
+    text-align: center;
+    border-radius: 5px;
+  }
+
+  .disclaimer {
+    display: inline-block;
+    letter-spacing: -1px;
+    margin-top: 10px;
+    color: var(--system-clr-primaryText);
+    font-family: var(--ff-base);
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+  }
+
+  section.benefits {
+    margin-top: 45px;
+    color: var(--system-clr-primaryText);
+  }
+
+  .benefits ul.list {
+    list-style: none;
+    padding-left: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .benefit-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--ff-base);
+  }
+
+  .benefit-item p.description {
+    margin: 0px;
+    font-weight: 400;
+  }
+
+  section.term-and-conditions {
+    width: 100%;
+    font-family: var(--ff-base);
+    color: #465a77a3;
+    margin: 45px 0px;
+  }
+
+  .legal,
+  .apply-terms {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    
+  }
+</style>

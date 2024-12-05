@@ -1,0 +1,55 @@
+---
+import "@splidejs/splide/css";
+const basePath = import.meta.env.BASE_URL;
+---
+
+<div id="splide" class="splide">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <slot/>
+    </ul>
+  </div>
+</div>
+
+<script>
+  import Splide from "@splidejs/splide";
+
+  // Initialize Splide
+  document.addEventListener("DOMContentLoaded", () => {
+    new Splide("#splide", {
+      autoplay: false, // Enable auto-play
+      /*interval: 7000, // 3 seconds between slides*/
+      perPage: 1, // Show 1 slide at a time
+      pagination: true, // Show pagination dots
+      arrows: true, // Show navigation arrows
+      /*spaceBetween: 30,*/
+    }).mount();
+  });
+</script>
+
+<style>
+  
+
+  ul {
+    padding-left: 0px;
+    list-style: none;
+  }
+
+  li.splide__slide {
+    min-height: 400px;
+  }
+
+  .item {
+    margin: 0px 10px;
+    font-family: var(--ff-base);
+    font-weight: 500;
+  }
+
+  .people {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: var(--ff-base);
+  }
+
+</style>
