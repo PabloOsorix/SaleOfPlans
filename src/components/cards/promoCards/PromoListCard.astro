@@ -56,6 +56,19 @@ const basePath = import.meta.env.BASE_URL;
     min-height: 400px;
   }
 
+  .splide__arrow--prev {
+    border-radius: 0% 50% 50% 50%;
+  }
+  
+  :global(.splide__arrow--next) {
+    right: 0px !important;
+    border-radius: 50% 0% 0px 50%;
+  }
+
+  :global(.splide__arrow--prev) {
+    left: 0px; /* Adjust position for left arrow */
+  }
+
   .item {
     margin: 0px 10px;
     font-family: var(--ff-base);
