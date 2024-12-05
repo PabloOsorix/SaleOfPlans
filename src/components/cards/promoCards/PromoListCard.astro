@@ -76,6 +76,13 @@ const basePath = import.meta.env.BASE_URL;
     width: 2.8em;
     height: 3em;
   }
+  :global(.splide__pagination__page) {
+    background: #85afed;
+  }
+
+  :global(.splide__pagination__page.is-active) {
+    background: var(--clr-primaryBackground);
+  }
 
   .item {
     margin: 0px 10px;
