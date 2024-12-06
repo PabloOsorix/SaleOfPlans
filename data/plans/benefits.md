@@ -8,6 +8,10 @@ familyPro:
     description: "4 Desayunos"
   - icon: "icons/icon-lunch.svg"
     description: "4 Almuerzos"
+  - icon: "icons/icon-pet.svg"
+    description: "Pet Friendly"
+  - icon: "icons/icon-car.svg"
+    description: Parqueadero
 
 family:
   - icon: "icons/icon-bed.svg"
@@ -18,6 +22,11 @@ family:
     description: "4 Desayunos"
   - icon: "icons/icon-lunch.svg"
     description: "4 Almuerzos"
+  - icon: "icons/icon-pet.svg"
+    description: "Pet Friendly"
+  - icon: "icons/icon-car.svg"
+    description: Parqueadero
+  
 
 friends:
   - icon: "icons/icon-bed.svg"
@@ -28,4 +37,8 @@ friends:
     description: "8 Personas"
   - icon: "icons/icon-breakfast.svg"
     description: "8 Desayunos"
+  - icon: "icons/icon-pet.svg"
+    description: "Pet Friendly"
+  - icon: "icons/icon-car.svg"
+    description: Parqueadero
 ---
