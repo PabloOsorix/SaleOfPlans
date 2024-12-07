@@ -1,4 +1,5 @@
 ---
+import { isOdd } from "@utils/numbers.js"
 import BaseLayout from "@layouts/BaseLayout.astro";
 import BasicBanner from "@components/banner/BasicBanner.astro";
 import PlanDetailCard from "@components/cards/planDetail/PlanDetailCard.astro";
@@ -8,7 +9,8 @@ import * as plans from "@data/plans/planInformation.md"
 import * as images from "@data/plans/planDetailImages.md"
 const planEntries = Object.entries(plans.frontmatter)
 const imageEntries = Object.entries(images.frontmatter)
-const isEven = (number) => number % 2 === 0
+const isOdd1 = (number) => number % 2 !== 0 
+
 ---
 
 <BaseLayout title="Planes">
@@ -34,10 +36,10 @@ const isEven = (number) => number % 2 === 0
             recommendation={plan.recommendation}
             price={plan.price}
             discountPrice={plan.discountPrice}
-            buttonRedirect={plan.buttonRedirect}
+            buttonRedirect={plan.whatsAppRedirect}
             benefits={plan.benefits}
             images={imageEntries[index][0] === key ? imageEntries[index][1].images : null}
-            invert={isEven(index)}
+            reverse={isOdd(index)}
             >
           </PlanDetailCard>
         ))
@@ -48,6 +50,14 @@ const isEven = (number) => number % 2 === 0
 
 
 <style>
+
+section.plan-detailed__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 img.palm-banner {
     filter: brightness(0.8);
     object-fit: cover;
@@ -113,10 +123,12 @@ img.palm-banner {
     }
 
     section.plan-detailed__list {
-      display: flex;
+
+      flex-direction: row;
       justify-content: space-between;
       max-width: 1300px;
       margin: 50px auto;
+      align-items: unset;
     }
 
 
