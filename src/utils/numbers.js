@@ -16,3 +16,5 @@ export function getDecimalPart(inputNumber) {
 
     return (inputNumber + "").split(".")[1];
 }
+
+export function isOdd(number) { return number % 2 !== 0 ? true : false}
