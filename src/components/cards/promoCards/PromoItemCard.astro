@@ -11,6 +11,7 @@ type Benefit = {
 };
 
 interface Props {
+  key: string
   category: string;
   title: string;
   recommendation: number;
@@ -24,6 +25,7 @@ interface Props {
 }
 
 const {
+  key,
   category,
   title,
   recommendation,
@@ -37,7 +39,6 @@ const {
   ...rest
 }: Props = Astro.props as Props;
 const sinteticID = generateRandomID()
-console.log(benefits)
 ---
 
 <promo-item-card
@@ -45,7 +46,7 @@ console.log(benefits)
   data-recommendation={recommendation}
   data-sintetic-id={sinteticID}
   >
-  <li>
+  <li id={key}>
     <div class="wrapper">
       
       <div class="category">
@@ -80,7 +81,7 @@ console.log(benefits)
           <h2 class="price__amount">$ {formatPriceToCOP(price)} COP</h2>
           <span class="discount__wrapper">
             <p class="percentage">-{discountPercent}%</p>
-            <p class="amount">{formatPriceToCOP(discountPrice)} COP</p>
+            <span class="amount">{formatPriceToCOP(discountPrice)}COP</span>
           </span>
         </section>
         
@@ -90,7 +91,7 @@ console.log(benefits)
             target="_blank"
             rel="noopener noreferrer"
           >
-            !Reserva ahora!
+            ¡Reserva ahora!
           </a>
       </span>
       <span class="disclaimer">*El descuento aplica en pagos de contado.</span>
@@ -169,19 +170,19 @@ promo-item-card {
     background: white;
     margin: 0px 10px;
     border-radius: 5px;
-    border: 3px solid var(--clr-primaryBackground);
+    border: 3px solid var(--system-primary-backgroundColor-1);
     margin-top: 10%;
     min-height: 500px;
   }
 
   .content {
-    width: 75%;
+    width: 80%;
     margin: auto;
     max-width: 251px;
   }
 
   .category {
-    background: var(--clr-primaryBackground);
+    background: var(--system-primary-backgroundColor-1);
     padding: 7px 0px;
   }
 
@@ -200,21 +201,22 @@ promo-item-card {
     color: var(--system-clr-primaryText);
     font-family: var(--ff-base);
     font-weight: 700;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     margin-bottom: 0px;
+
   }
   .recommendation {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 4px;
   }
   .recommendation p {
     
     color: var(--system-clr-primaryText);
     font-family: var(--ff-base);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin: 0px;
   }
 
@@ -228,8 +230,8 @@ promo-item-card {
   .dot {
     height: 13px;
     width: 13px;
-    background-color: var(--clr-primaryBackground);
-    border: 2px solid var(--clr-primaryBackground);
+    background-color: var(--system-primary-backgroundColor-1);
+    border: 2px solid var(--system-primary-backgroundColor-1);
     border-radius: 50%;
     display: inline-block;
     position: relative
@@ -253,19 +255,31 @@ promo-item-card {
     justify-content: center;
     align-items: center;
     font-family: var(--ff-base);
+    width: 100%;
+    margin: 15px 0px;
+  }
+
+  span.cop {
+    font-size: 1rem;
+    font-style: italic;
+    text-decoration: none;
+  }
+  span.discount__cop {
+    font-style: italic;
   }
 
   h2.price__amount {  
     color: var(--system-clr-primaryText);
     margin-top: 25px;
     margin-bottom: 0px;
-    font-size: 1.9rem;
+    font-size: 2.1rem;
     font-weight: 700;
+    width: 100%;
   }
 
   span.discount__wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     font-family: var(--ff-base);
     font-weight: 500;
@@ -277,18 +291,19 @@ promo-item-card {
     margin: 0px;
     color: white;
     font-weight: 600;
-    background-color: var(--system-primary-backgorund-2);
+    background-color: var(--system-primary-backgorundColor-2);
     border-radius: 10px;
     padding: 1px 5px;
+    font-size: 0.9rem;
   }
 
-  .discount__wrapper p.amount {
+  .discount__wrapper span.amount {
     color: #C1C5CB;
     text-decoration: line-through;
     margin: 0px;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     font-weight: 300;
-    padding-right: 5px;
+    padding-right: 11px;
   }
 
   .button__wrapper {
@@ -296,7 +311,7 @@ promo-item-card {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 35px;
+    margin-top: 45px;
   }
 
   .button {
@@ -305,7 +320,7 @@ promo-item-card {
     font-family: var(--ff-base);
     font-size: 1.3rem;
     font-weight: 600;
-    background: var(--clr-primaryBackground);
+    background: var(--system-primary-backgroundColor-1);
     padding: 12px 0px;
     width: 250px;
     text-align: center;
@@ -325,7 +340,7 @@ promo-item-card {
   }
 
   section.benefits {
-    margin-top: 35px;
+    margin-top: 50px;
     color: var(--system-clr-primaryText);
   }
 
@@ -367,13 +382,24 @@ promo-item-card {
     
   }
 
+@media screen and (width >350px) {
+  .content {
+    width: 75%;
+  }
+}
+
 @media screen and (width >= 720px) {
-  h2.price__amount { 
-    font-size: 2.3rem;
+  
+  promo-item-card {
+    max-width: 350px;
   }
 
-  .discount__wrapper p.amount {
-    font-size: 1.8rem;
+  h2.price__amount { 
+    font-size: 2.1rem;
+  }
+
+  .discount__wrapper span.amount {
+    font-size: 1.4rem;
   }
   
   .legal,
