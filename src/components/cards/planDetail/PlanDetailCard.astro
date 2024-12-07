@@ -1,0 +1,347 @@
+---
+import "@styles/global.css"
+import "@splidejs/splide/css";
+import { generateRandomID } from "@utils/randomId.js";
+import { formatPriceToCOP } from "@utils/currency";
+import Image from 'astro/components/Image.astro';
+const basePath = import.meta.env.BASE_URL;
+
+type Benefit = {
+  icon: string;
+  description: string;
+};
+
+type ImageData = {
+  src: string;
+  alt: string;
+};
+
+interface Props {
+  class:string;
+  planName: string;
+  benefits: Benefit[];
+  images: ImageData[];
+  planTermConditions: string;
+  price: number;
+  recommendation: number;
+  discountPrice: number;
+  buttonRedirect: string;
+  invert: boolean;
+}
+
+
+const {
+  class:customClass,
+  planName,
+  benefits,
+  images,
+  planTermConditions,
+  price,
+  recommendation,
+  discountPrice,
+  buttonRedirect,
+  invert = false,
+  ...rest
+} = Astro.props
+
+const key = generateRandomID();
+---
+
+<promo-detail-card
+  class={"plan-detail-card" + " " + customClass}
+  {...rest}
+  data-key={key}
+  class:list={{"invert-card": invert}}
+  >
+  <section class="slider__wrapper">
+    <div id="splide" class={"splide" + " " + key}>
+      <div class="splide__track">
+        <ul class="splide__list">
+          { images?.length > 0 &&
+            images.map((image) => (
+              <li class="splide__slide">
+                <Image
+                src={basePath + image.src}
+                alt={image.alt}
+                width={500}
+                height={350}
+                >
+                </Image>
+              </li>
+            ))
+          }
+          <li class="splide__slide">
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="information__wrapper">
+    
+    <section class="title-and-benefits">
+      <h2 class="plan-name">{planName}</h2>
+      <section class="benefits">
+        <ul class="benefits__list">
+
+          { benefits?.length > 0 &&
+            benefits.map((element) => (
+              element.description !== "4 Personas" ?
+              <li class="benefit-item">
+                <Image
+                src={basePath + element.icon}
+                alt=""
+                width={15}
+                height={15}
+                >
+                </Image>
+                <p class="benefit-name">{element.description}</p>
+              </li>
+              : null
+            ))
+          }
+        </ul>
+      </section>
+    </section>
+
+    <section class="terms-and-conditions">
+      <p class="information">{planTermConditions}</p>
+
+    </section>
+
+    <section class="price-and-button">
+      
+      <span class="price__wrapper">
+        <h3 class="price__discount">${formatPriceToCOP(discountPrice)}COP</h3>
+        <h2 class="price">${formatPriceToCOP(price)}COP</h2>
+        <p  class="price__disclaimer">Pago inmediato</p>
+      </span>
+
+      <span class="button__wrapper">
+        <a href={"#quote"}
+          class="button quotes"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Cuotas</a>
+
+        <a href={buttonRedirect}
+          class="button buy"
+          target="_blank"
+          rel="noopener noreferrer"
+        >¡Compra Ya!</a>
+      </span>
+
+    </section>
+  </section>
+</promo-detail-card>
+
+
+
+<script>
+  import Splide from "@splidejs/splide";
+
+  class  PromoDetailCard extends HTMLElement {
+    constructor() {
+      super();
+
+    }
+
+    connectedCallback() {
+      const key = this.dataset.key;
+      document.addEventListener("DOMContentLoaded", () => {
+      const splide = new Splide(`.splide.${key}`, {
+      type: 'loop',
+      autoplay: true, // Enable auto-play
+      interval: 4000, // 3 seconds between slides*/
+      perPage: 1, // Show 1 slide at a time
+      pagination: true, // Show pagination dots
+      arrows: false,
+      pauseOnHover: true,
+      }).mount();
+
+    });
+    }
+    
+    disconnectedCallback() {
+    }
+  };
+
+  customElements.define('promo-detail-card', PromoDetailCard);
+
+</script>
+
+
+
+<style>
+  @media screen and (width >= 720px) {
+    
+
+  promo-detail-card.plan-detail-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--ff-base);
+    width: 100%;
+    gap: 50px;
+    max-height: 290px;
+  }
+
+  .invert-card {
+    flex-direction: row-reverse;
+  }
+
+
+  .slider__wrapper {
+    width: 40%;
+  }
+
+  li.splide__slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  li.splide__slide img {
+    width: 100%;
+    height: auto;
+  }
+
+  :global(.splide__pagination__page) {
+    background: #85afed;
+  }
+
+  :global(.splide__pagination__page.is-active) {
+    background: var(--system-primary-backgroundColor-1);
+  }
+
+
+  section.information__wrapper {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  section.title-and-benefits {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  h2.plan-name {
+    color: var(--system-primary-backgroundColor-1);
+    font-family: var(--ff-base);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  ul.benefits__list {
+    padding-left: 0px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  li.benefit-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  } 
+
+  p.benefit-name {
+    margin: 0px;
+    font-size: 0.5rem;
+    font-family: var(--ff-base);
+    color: var(--system-clr-primaryText);
+  }
+  
+  section.terms-and-conditions {
+    width: 100%;
+  }
+
+  p.information {
+    font-family: var(--ff-base);
+    color: var(--system-clr-primaryText);
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  section.price-and-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .price__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-style: italic;
+  }
+
+  h3.price__discount {
+    color: #C1C5CB;
+    text-decoration: line-through;
+    margin: 0px;
+    font-size: 1.8rem;
+    font-weight: 300;
+    text-align: right;
+    justify-self: flex-end;
+    width: 100%;
+  }
+
+  h2.price {
+    margin: 0px;
+    color: var(--system-primary-backgorundColor-2);
+    margin-bottom: 0px;
+    font-size: 2.1rem;
+    font-weight: 700;
+  }
+
+  p.price__disclaimer {
+    margin: 0px;
+    color: var(--system-primary-backgorundColor-2);
+    font-size: 0.8rem;
+    text-align: right;
+    justify-self: flex-end;
+    width: 100%;
+  }
+
+  .button__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .button {
+    text-decoration: none;
+    width: 130px;
+    padding: 7px 0px;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .button.quotes {
+    background: var(--system-primary-backgroundColor-1);
+
+  }
+
+  .button.buy {
+    background: var(--system-primary-backgorundColor-2);
+  }
+
+
+
+
+}
+</style>
