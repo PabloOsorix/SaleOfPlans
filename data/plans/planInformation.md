@@ -22,7 +22,7 @@ FamilyPro:
         description: "Pet Friendly"
       - icon: "icons/icon-car.svg"
         description: Parqueadero
-
+  planTermConditions: "2 dias 1 noche acomodacion para cuatro (4) personas con cuatro (4)desayunos y almuerzos incluidos. Promocion vigente del 1 de diciembre del 2024 al 30 de mayo del 2025. No aplica viajar del 11 al 20 de abril ni fines de semana con festivos en 2025. Para pagos diferidos se debera cancelar la primera cuota para fijar la reserva."
 
 Family:
   title: Plancito Familiar
@@ -46,6 +46,7 @@ Family:
       description: "Pet Friendly"
     - icon: "icons/icon-car.svg"
       description: Parqueadero
+  planTermConditions: "2 dias 1 noche acomodacion para cuatro (4) personas con cuatro  (4) desayunos y almuerzos incluidos. Promocion vigente del 1 de diciembre del 2024 al 30 de mayo del 2025. No aplica viajar del 11 al 20 de abril ni fines de semana con festivos en 2025. Para pagos diferidos se debera cancelar la primera cuota para fijar la reserva."
 
 
 Friends:
@@ -70,6 +71,7 @@ Friends:
       description: "Pet Friendly"
     - icon: "icons/icon-car.svg"
       description: Parqueadero
+  planTermConditions: "2 dias 1 noche acomodacion para ocho (8) personas con ocho (8) desayunos y almuerzos incluidos. Promocion vigente del 1 de diciembre del 2024 al 30 de mayo del 2025. No aplica viajar del 11 al 20 de abril ni fines de semana con festivos en 2025. Para pagos diferidos se debera cancelar la primera cuota para fijar la reserva."
 
 ---
 
