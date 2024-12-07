@@ -7,7 +7,8 @@ FamilyPro:
   price: 350000
   discountPercent: 12
   discountPrice: 400000
-  buttonRedirect: https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar%20Pro&type=phone_number&app_absent=0
+  planRedirect: "#FamilyPro"
+  whatsAppRedirect: https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar%20Pro&type=phone_number&app_absent=0
   legalRestriction: "*Aplica fines de semana sin festivo."
   benefits:
       - icon: "icons/icon-bed.svg"
@@ -31,7 +32,8 @@ Family:
   price: 300000
   discountPercent: 10
   discountPrice: 400000
-  buttonRedirect: "https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar&type=phone_number&app_absent=0"
+  planRedirect: "#Family"
+  whatsAppRedirect: "https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar&type=phone_number&app_absent=0"
   legalRestriction: "*Aplica fines de semana sin festivo."
   benefits:
     - icon: "icons/icon-bed.svg"
@@ -56,7 +58,8 @@ Friends:
   price: 620000
   discountPercent: 11
   discountPrice: 700000
-  buttonRedirect: "https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Amigos&type=phone_number&app_absent=0"
+  planRedirect: "#Friends"
+  whatsAppRedirect: "https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Amigos&type=phone_number&app_absent=0"
   legalRestriction: "*Aplica fines de semana sin festivo."
   benefits:
     - icon: "icons/icon-bed.svg"
