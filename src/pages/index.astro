@@ -5,9 +5,9 @@ import PromoListCard from "@components/cards/promoCards/PromoListCard.astro";
 import PromoItemCard from "@components/cards/promoCards/PromoItemCard.astro";
 const mainBanner = "banners/home/palm-home-banner-cl-webp.webp";
 import * as plans from "@data/plans/planInformation.md"
-
+const basePath = import.meta.env.BASE_URL;
 const planEntries = Object.entries(plans.frontmatter)
-
+const planesPath = basePath + "planes/"
 ---
 
 <BaseLayout title="Home">
@@ -30,7 +30,7 @@ const planEntries = Object.entries(plans.frontmatter)
           price={plan.price}
           discountPercent={plan.discountPercent}
           discountPrice={plan.discountPrice}
-          buttonRedirect={plan.buttonRedirect}
+          buttonRedirect={ planesPath + plan.planRedirect}
           legalRestriction={plan.legalRestriction}
           benefits={plan.benefits}
 
