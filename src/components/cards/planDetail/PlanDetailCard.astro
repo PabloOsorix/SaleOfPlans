@@ -26,7 +26,7 @@ interface Props {
   recommendation: number;
   discountPrice: number;
   buttonRedirect: string;
-  invert: boolean;
+  reverse: boolean;
 }
 
 
@@ -40,7 +40,7 @@ const {
   recommendation,
   discountPrice,
   buttonRedirect,
-  invert = false,
+  reverse,
   ...rest
 } = Astro.props
 
@@ -50,9 +50,11 @@ const key = generateRandomID();
 <promo-detail-card
   class={"plan-detail-card" + " " + customClass}
   {...rest}
+  id={customClass}
   data-key={key}
-  class:list={{"invert-card": invert}}
+  class:list={{"reverse-card": reverse}}
   >
+  <h2 class="plan-name mobile">{planName}</h2>
   <section class="slider__wrapper">
     <div id="splide" class={"splide" + " " + key}>
       <div class="splide__track">
@@ -70,7 +72,6 @@ const key = generateRandomID();
               </li>
             ))
           }
-          <li class="splide__slide">
         </ul>
       </div>
     </div>
@@ -80,13 +81,13 @@ const key = generateRandomID();
   <section class="information__wrapper">
     
     <section class="title-and-benefits">
-      <h2 class="plan-name">{planName}</h2>
+      <h2 class="plan-name desk">{planName}</h2>
       <section class="benefits">
         <ul class="benefits__list">
 
           { benefits?.length > 0 &&
             benefits.map((element) => (
-              element.description !== "4 Personas" ?
+              !element.description.includes("Personas") ?
               <li class="benefit-item">
                 <Image
                 src={basePath + element.icon}
@@ -173,23 +174,186 @@ const key = generateRandomID();
 
 
 <style>
-  @media screen and (width >= 720px) {
-    
+promo-detail-card {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--ff-base);
+  margin-top: 25px;
+  box-shadow: 1px 1px 5px #a9a9a9;
+  padding: 0px 10px 15px 10px;
+  max-width: 350px;
+}
 
-  promo-detail-card.plan-detail-card {
+.slider__wrapper {
+    width: 100%;
+    max-height: 300px;    
+    
+}
+
+li.splide__slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+li.splide__slide img {
+  width: 100%;
+  height: auto;
+  max-height: 170px;
+}
+
+:global(.splide__pagination__page) {
+    background: #85afed;
+}
+
+:global(.splide__pagination__page.is-active) {
+  background: var(--system-primary-backgroundColor-1);
+}
+
+
+
+section.title-and-benefits {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+ul.benefits__list {
+    padding-left: 0px;
+    list-style: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+  }
+
+li.benefit-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} 
+
+p.benefit-name {
+  margin: 0px;
+  font-size: 0.5rem;
+  font-family: var(--ff-base);
+  color: var(--system-clr-primaryText);
+}
+
+h2.plan-name {
+  color: var(--system-primary-backgroundColor-1);
+  font-family: var(--ff-base);
+  font-weight: 700;
+}
+
+h2.plan-name.desk {
+  display: none;
+  margin-bottom: 5px;
+}
+
+h2.plan-name.mobile {
+  margin: 10px 0px;
+  font-size: 1.5rem;
+  text-align: left;
+  width: 100%;
+}
+
+
+p.information {
     font-family: var(--ff-base);
+    color: var(--system-clr-primaryText);
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+span.price__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+}
+
+h3.price__discount {
+  color: #C1C5CB;
+  text-decoration: line-through;
+  margin: 0px;
+  font-size: 1.6rem;
+  font-weight: 300;
+  text-align: right;
+  width: 100%;
+}
+
+h2.price {
+  margin: 0px;
+  color: var(--system-primary-backgorundColor-2);
+  margin-bottom: 0px;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: right;
+  width: 100%;
+}
+
+p.price__disclaimer {
+    margin: 0px;
+    color: var(--system-primary-backgorundColor-2);
+    font-size: 0.8rem;
+    text-align: right;
+    justify-self: flex-end;
+    width: 100%;
+}
+
+span.button__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+a.button {
+  text-decoration: none;
+  width: 100%;
+  padding: 7px 0px;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+
+a.button.quotes {
+  background: var(--system-primary-backgroundColor-1);
+
+}
+
+a.button.buy {
+  background: var(--system-primary-backgorundColor-2);
+}
+
+
+
+
+
+
+@media screen and (width > 1250px) {
+
+  promo-detail-card {
+    flex-direction: row;
+    align-items: center;
     width: 100%;
     gap: 50px;
     max-height: 290px;
+    padding: 10px;
+    box-shadow: none;
+    max-width: unset;
   }
 
-  .invert-card {
+  .reverse-card {
     flex-direction: row-reverse;
   }
-
 
   .slider__wrapper {
     width: 40%;
@@ -203,16 +367,11 @@ const key = generateRandomID();
 
   li.splide__slide img {
     width: 100%;
+    min-height: 261px;
     height: auto;
   }
 
-  :global(.splide__pagination__page) {
-    background: #85afed;
-  }
 
-  :global(.splide__pagination__page.is-active) {
-    background: var(--system-primary-backgroundColor-1);
-  }
 
 
   section.information__wrapper {
@@ -225,51 +384,33 @@ const key = generateRandomID();
 
   section.title-and-benefits {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
   }
 
-  h2.plan-name {
-    color: var(--system-primary-backgroundColor-1);
-    font-family: var(--ff-base);
-    font-size: 1.5rem;
-    font-weight: 700;
+  h2.plan-name.desk {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  h2.plan-name.mobile {
+    display: none;
   }
 
   ul.benefits__list {
-    padding-left: 0px;
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 5px;
   }
 
-  li.benefit-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  } 
 
-  p.benefit-name {
-    margin: 0px;
-    font-size: 0.5rem;
-    font-family: var(--ff-base);
-    color: var(--system-clr-primaryText);
-  }
   
   section.terms-and-conditions {
     width: 100%;
   }
 
   p.information {
-    font-family: var(--ff-base);
-    color: var(--system-clr-primaryText);
-    text-align: left;
     font-size: 1rem;
-    font-weight: 500;
   }
 
   section.price-and-button {
@@ -279,69 +420,34 @@ const key = generateRandomID();
     width: 100%;
   }
 
-  .price__wrapper {
-    display: flex;
-    flex-direction: column;
+  span.price__wrapper {
     justify-content: space-between;
-    align-items: center;
-    font-style: italic;
   }
 
+
+
   h3.price__discount {
-    color: #C1C5CB;
-    text-decoration: line-through;
-    margin: 0px;
     font-size: 1.8rem;
     font-weight: 300;
-    text-align: right;
-    justify-self: flex-end;
-    width: 100%;
+    text-align: left;
   }
 
   h2.price {
-    margin: 0px;
-    color: var(--system-primary-backgorundColor-2);
-    margin-bottom: 0px;
     font-size: 2.1rem;
-    font-weight: 700;
   }
 
-  p.price__disclaimer {
-    margin: 0px;
-    color: var(--system-primary-backgorundColor-2);
-    font-size: 0.8rem;
-    text-align: right;
-    justify-self: flex-end;
-    width: 100%;
-  }
 
-  .button__wrapper {
+  span.button__wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
   }
 
-  .button {
+  a.button {
     text-decoration: none;
     width: 130px;
-    padding: 7px 0px;
-    color: white;
-    font-weight: 600;
-    text-align: center;
   }
-
-  .button.quotes {
-    background: var(--system-primary-backgroundColor-1);
-
-  }
-
-  .button.buy {
-    background: var(--system-primary-backgorundColor-2);
-  }
-
-
-
 
 }
 </style>
