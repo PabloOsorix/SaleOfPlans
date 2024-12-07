@@ -12,8 +12,14 @@
     --media-tablet: 720px;
     --media-desk: 1150px;
     
-    --clr-primaryBackground: #3B82ED;
-    --system-primary-backgorund-2: #ED3B82;
+    --system-primary-backgroundColor-1: #3B82ED;
+    --system-primary-backgorundColor-2: #ED3B82;
+    --system-primary-backgorundColor-3: #EDA63B;
+    --system-primary-backgorundColor-4: #4D3BED;
+    
+    --system-font-family-CabinCondensed: "Cabin", sans-serif;
+
+    
     --clr-pry-base-3: #e8e8e8;
 
     --system-clr-primaryText: #465A77;
