@@ -63,7 +63,7 @@ const basePath = import.meta.env.BASE_URL;
 }
 
 #menu-mobile--wrapper {
-    background: var(--clr-primaryBackground);
+    background: var(--system-primary-backgroundColor-1);
     width: 65%;
     height: 100%;
     position: fixed;
@@ -124,13 +124,13 @@ const basePath = import.meta.env.BASE_URL;
     width: 30px;
     height: 2px;
     border: none;
-    background: white;
+    background: var(--system-primary-backgroundColor-1);
     transition: 0.5s;
     z-index: 999;
 }
 
 #menu-mobile--input:checked ~ #hamburguer > hr {
-  background-color: #fff;
+  background-color: var(--system-primary-backgroundColor-1);
 }
 
 #menu-mobile--input:checked ~ #hamburguer > hr:nth-child(1) {
