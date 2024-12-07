@@ -3,63 +3,42 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import BasicBanner from "@components/banner/BasicBanner.astro";
 import PromoListCard from "@components/cards/promoCards/PromoListCard.astro";
 import PromoItemCard from "@components/cards/promoCards/PromoItemCard.astro";
-const mainBanner = "banners/home/Hotel-Grand-Dubai-1.webp";
-import * as benefits from "@data/plans/benefits.md";
+const mainBanner = "banners/home/palm-home-banner-cl-webp.webp";
+import * as plans from "@data/plans/planInformation.md"
+
+const planEntries = Object.entries(plans.frontmatter)
 
 ---
 
 <BaseLayout title="Home">
-  <BasicBanner image="">
+  <BasicBanner image={mainBanner} class={"palm-banner"}>
     <span class="title__cont">
       <h2 class="title">Plancitos.com</h2>
+      <h3 class="sub-title">Tu plan: <span>Fácil - Rapido - Sin rollos</span></h3>
     </span>
   </BasicBanner>
   
   <PromoListCard>
-    <PromoItemCard
-      class=""
-      title={"Plancito Familiar Pro"}
-      category={"Express"}
-      recommendation={4}
-      price={350000}
-      discountPercent={12}
-      discountPrice={400000}
-      buttonRedirect="https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar%20Pro&type=phone_number&app_absent=0"
-      legalRestriction="*Aplica fines de semana sin festivo."
-      benefits={benefits.frontmatter.familyPro}
+    {
+      planEntries.map(([key, plan]) => (
+        <PromoItemCard
+          key={key}
+          class=""
+          title={plan.title}
+          category={plan.category}
+          recommendation={plan.recommendation}
+          price={plan.price}
+          discountPercent={plan.discountPercent}
+          discountPrice={plan.discountPrice}
+          buttonRedirect={plan.buttonRedirect}
+          legalRestriction={plan.legalRestriction}
+          benefits={plan.benefits}
 
-      >
-    </PromoItemCard>
+          >
+        </PromoItemCard>
+      ))
+    }
 
-    <PromoItemCard
-      class=""
-      title={"Plancito Familiar"}
-      category={"Express"}
-      recommendation={3.5}
-      price={300000}
-      discountPercent={10}
-      discountPrice={330000}
-      
-      buttonRedirect="https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar&type=phone_number&app_absent=0"
-      benefits={benefits.frontmatter.family}
-      legalRestriction="*Aplica fines de semana sin festivo."
-    >
-    </PromoItemCard>
-
-
-    <PromoItemCard
-      class=""
-      title={"Plancito Amigos"}
-      category={"Express"}
-      recommendation={4}
-      price={620000}
-      discountPercent={11}
-      discountPrice={700000}
-      buttonRedirect="https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Amigos&type=phone_number&app_absent=0"
-      benefits={benefits.frontmatter.friends}
-      legalRestriction="*Aplica fines de semana sin festivo."
-    >
-    </PromoItemCard>
 
   </PromoListCard>
   
@@ -67,9 +46,19 @@ import * as benefits from "@data/plans/benefits.md";
 
 <style>
 
+  img.palm-banner {
+    filter: brightness(0.8);
+    object-fit: cover;
+  }
+
   span.title__cont {
     grid-column: 2;
     grid-row: 2;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
   }
 
   .title {
@@ -78,22 +67,47 @@ import * as benefits from "@data/plans/benefits.md";
     font-family: var(--ff-base);
     font-weight: 700;
     margin: 0px;
+
+  }
+  .sub-title {
+    margin: 0px;
+    text-align: left;
+    font-family: var(--ff-base);
+    font-style: italic;
+    color: white;
+  }
+  .sub-title span {
+    color: white;
   }
 
   @media screen and (width >= 720px) {
+    
+    img.palm-banner {
+      object-fit: unset;
+    }
+    
+    span.title__cont {
+      grid-column: 1/3;
+      grid-row: 2;
+      justify-content: center;
+      padding-left: 3%;
 
+    }
   }
 
   @media screen and (width >= 1150px) {
-
+    img.palm-banner {
+      object-fit: cover;
+      mask-repeat: repeat;
+    }
     span.title__cont {
-      grid-column: 2;
+      grid-column: 1/3;
       grid-row: 2;
     }
     
     .title {
       color: white;
-      font-size: 8rem;
+      font-size: 6rem;
     }
   }
 
