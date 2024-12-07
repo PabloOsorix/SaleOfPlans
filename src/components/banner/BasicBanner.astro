@@ -1,20 +1,27 @@
 ---
 import Image from "astro/components/Image.astro";
 const basePath = import.meta.env.BASE_URL;
-const { image } = Astro.props;
+const {
+  image,
+  class:customClass,
+  ...rest
+  } = Astro.props;
 ---
 
-<section class="banner--section">
-  { image && image !== "" ?
-    <Image
-      src=`${basePath}${image}`
-      alt=""
-      width="1600"
-      height="600"
-      loading="eager"
-    />
-    : null
-  }
+<section class={"banner--section" + " " + customClass} {...rest}>
+  <section class="banner__wrapper">
+    { image && image !== "" ?
+      <Image
+        class={customClass} {...rest}
+        src={basePath + image}
+        alt=""
+        width="1600"
+        height="600"
+        loading="eager"
+      />
+      : null
+    }
+  </section>
 
   <section class="overay__container">
     <div class="content w-max">
