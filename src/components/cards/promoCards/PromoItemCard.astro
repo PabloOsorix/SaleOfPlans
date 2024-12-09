@@ -117,8 +117,8 @@ const sinteticID = generateRandomID()
       </section>
 
       <section class="term-and-conditions">
-        <span class="legal">{legalRestriction}</span>
-        <span class="apply-terms">*Aplican terminos y condiciones</span>
+        <span class="legal"><a href={buttonRedirect} target="_self" rel="noreferrer noopener">{legalRestriction}</a></span>
+        <span class="apply-terms"><a href={buttonRedirect} target="_self" rel="noreferrer noopener">*Aplican terminos y condiciones</a></span>
 
       </section>
 
@@ -372,14 +372,14 @@ promo-item-card {
     margin: 45px 0px;
   }
 
-  .legal,
-  .apply-terms {
+  .legal a,
+  .apply-terms a{
     display: inline-block;
     width: 100%;
     text-align: center;
     font-size: 0.8rem;
     font-weight: 500;
-    
+    color: var(--system-primary-backgroundColor-1);
   }
 
 @media screen and (width >350px) {
