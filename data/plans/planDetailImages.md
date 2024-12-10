@@ -1,7 +1,7 @@
 ---
 FamilyPro:
   images:
-    - src: "banners/hotels/Los-naranjos-webp.webp"
+    - src: "banners/hotels/los-naranjos/Los-naranjos-entrada-webp.webp"
       alt: "2 Días 1 Noche"
     - src: "banners/hotels/Los-naranjos-webp.webp"
       alt: "4 Personas"
