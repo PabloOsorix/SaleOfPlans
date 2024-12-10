@@ -42,7 +42,7 @@ const basePath = import.meta.env.BASE_URL;
     font-family: var(--ff-base);
     font-weight: 800;
     font-size: 2rem;
-    -webkit-text-stroke: medium;
+    -webkit-text-stroke: thin;
 
   }
   .company-name a {
@@ -56,12 +56,17 @@ const basePath = import.meta.env.BASE_URL;
     justify-content: center;
     align-items: center;
   }
+  
   @media screen and (width >= 770px) {
     
   .logo--wrapper {
     justify-content: flex-start;
   }
+  
+  .company-name {
+    -webkit-text-stroke: medium;
   }
+}
   
 
 
