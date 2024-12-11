@@ -12,5 +12,12 @@ export default defineConfig({
     ssr: {
       external: ['@splidejs/splide'],
     },
+     css: {
+      preprocessorOptions: {
+        css: {
+          additionalData: '@import "/src/styles/global.css";',
+        },
+      },
+    },
   },
 });
