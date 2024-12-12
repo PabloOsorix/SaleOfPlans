@@ -1,0 +1,78 @@
+---
+const maxNumberOfQuotes = [2, 3, 4];
+import * as plans from "@data/plans/planInformation.md"
+const basePath = import.meta.env.BASE_URL;
+const planEntries = Object.entries(plans.frontmatter)
+const planAndPrices = []
+planEntries.map(([key, plan]) => (
+  planAndPrices.push(
+    {
+      title:  plan.title,
+      price: plan.price,
+      discountPercent: plan.discountPercent
+  })
+))
+---
+
+<section class="calculator">
+  <div class="wrapper">
+
+    <select class="plan-select">
+      <option selected disabled>Selecciona tu plan</option>
+      {
+        planEntries.map(([key, plan]) => (
+        <option value={plan.title}>{plan.title} </option>
+        ))
+      }      
+    </select>
+
+
+    <select class="quote-select">
+      <option selected disabled>N cuotas</option>
+      {
+        maxNumberOfQuotes.map((number) =>
+          <option value={number}>{number} </option>
+        )
+      }
+    </select>
+
+    <div class="price__wrapper">Precio Total: <span class="total-price"></span></div>
+    <div class="price__wrapper">valor de la cuota a pagar mensualmente: <span class="quote-price"></span></div>
+  </div>
+</section>
+
+<script define:vars={{planAndPrices}}>
+
+
+const quoteSelector = document.querySelector(".quote-select");
+const planSelector = document.querySelector(".plan-select");
+
+quoteSelector.addEventListener("change", () => {
+  updateQuoteCalculation()
+})
+
+planSelector.addEventListener("change", () => {
+  updateQuoteCalculation()
+})
+
+
+function updateQuoteCalculation() {
+  const planName = document.querySelector(".plan-select").value;
+  const quoteNumber = document.querySelector(".quote-select").value;
+
+
+  const selectedPlan = planAndPrices.filter(function (plan) {
+    return plan.title === planName;
+  });
+
+  var basePrice = selectedPlan[0].price
+  var baseDiscount = selectedPlan[0].discountPercent
+  const priceTotal = basePrice += basePrice * ( baseDiscount / 100)
+  const quotePrice = priceTotal / quoteNumber
+
+  document.querySelector(".total-price").innerHTML = priceTotal
+  document.querySelector(".quote-price").innerHTML = quotePrice
+
+}
+  
+</script>
