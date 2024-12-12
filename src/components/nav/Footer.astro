@@ -9,44 +9,52 @@ const basePath = import.meta.env.BASE_URL;
     <nav class="w-max">
         <section class="client-service--section">
           <div class="wrapper">
-            <h2 class="">SERVICIO AL CLIENTE</h2>
-            <ul>
-              <li><a class="" href=`${basePath}nosotros`>Nosotros</a></li>
-            </ul>
+            <div class="container">
+              <h2 class="">Servicio al cliente</h2>
+              <ul>
+                <li><a class="" href=`${basePath}nosotros`>nosotros</a></li>
+              </ul>
+            </div>
           </div>
         </section>
 
         <section class="contact--section">
           <div class="wrapper">
-            <h2 class="">CONTACTANOS</h2>
-            <ul>
-              <li><a class="" href=`${basePath}contacto`>Quiero que me contacten</a></li>
-              <li><a class="" href="tel:+573133336464">+57 313 333 6464</a></li>
-              <li><a class="" href=`mailto:${contactEmail}`>{contactEmail}</a></li>
-            </ul>
+            <div class="container">
+              <h2 class="">Contactanos</h2>
+              <ul>
+                <li><a class="" href=`${basePath}contacto`>quiero que me contacten</a></li>
+                <li><a class="phone" href="tel:+573232213828">+57 323-221-3828</a></li>
+                <li><a class="mail" href=`mailto:${contactEmail}`>{contactEmail}</a></li>
+              </ul>
+            </div>
           </div>
         </section>
 
         <section class="terms-conditions--section">
           <div class="wrapper">
-            <h2 class="">POLITICAS, TERMINOS Y<br class="break-line"> CONDICIONES</h2>
-            <ul>
-              <li><a class="" href=`${basePath}terminos-y-condiciones`>Terminos y Condiciones</a></li>
-            </ul>
+            <div class="container">
+              <h2 class="">Politicas, Terminos y<br class="break-line"> Condiciones</h2>
+              <ul>
+                <li><a class="" href=`${basePath}terminos-y-condiciones`>terminos y condiciones</a></li>
+              </ul>
+            </div>
           </div>
         </section>
 
-        <section class="follow-us--section">
-          <div class="wrapper">
-            <h2 class="">SÍGUENOS</h2>
-            <ul>
-              <li><Image src=`${basePath}icons/fb-logo-svg.svg` alt="logo cliqueable de facebook" width="25" height="25"/></li>
-              <li><Image src=`${basePath}icons/insta-logo-svg-3.svg` alt="logo cliqueable de instagram" width="27.5" height="25"/></li>
-              <li><Image src=`${basePath}icons/tiktok-logo-svg.svg` alt="logo cliqueable de tiktok" width="25" height="25"/></li>
-            </ul>
-          </div>
-        </section>
       </nav>
+
+      <section class="follow-us--section">
+        <div class="wrapper">
+          <h2 class="">Síguenos</h2>
+          <ul>
+            <li><Image src=`${basePath}icons/fb-logo-svg.svg` alt="logo cliqueable de facebook" width="25" height="25"/></li>
+            <li><Image src=`${basePath}icons/insta-logo-svg-3.svg` alt="logo cliqueable de instagram" width="27.5" height="25"/></li>
+            <li><Image src=`${basePath}icons/tiktok-logo-svg.svg` alt="logo cliqueable de tiktok" width="25" height="25"/></li>
+          </ul>
+        </div>
+      </section>
+
       <h3 class="copyright">Copyright 2024, Skyline Technologies</h3>
 
 
@@ -63,39 +71,49 @@ const basePath = import.meta.env.BASE_URL;
 
   nav {
     display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(3, 1fr);
   }
 
   section {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
   }
 
+  .wrapper {
+    width: 100%;
+  }
 
   div > h2 {
     color: white;
-    font-size: 1.1rem;
-    margin-top: 2rem;
+    font-size: 1.3rem;
+    margin-top: 0px;
     margin-bottom: .5rem;
-    font-family: var(--ff-base);
-    font-weight: 550;
+    font-family: var(--ff-base-2);
+    font-weight: 600;
   }
 
 
-
   ul {
-    list-style: none;
-    padding-left: 0px;
+    padding-left: 2px;
     color: white;
-    margin: 4px;
+    margin-top: 0px;
+    list-style: none;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
   }
 
 
 
   li a {
     text-decoration: none;
-    font-family: var(--ff-base);
-    font-weight: 400;
+    font-family: var(--ff-base-2);
+    font-weight: 300;
+    font-size: 1.1rem;
 
   }
   li::marker {
@@ -118,9 +136,22 @@ const basePath = import.meta.env.BASE_URL;
     grid-row: 2;
   }
 
+  li a.phone,
+  li a.mail  {
+    text-decoration: underline;
+  }
+
   .terms-conditions--section {
     grid-column: 1;
     grid-row: 3;
+  }
+
+  .follow-us--section {
+    margin-top: 1rem;
+  }
+
+  .follow-us--section h2 {
+    text-align: center;
   }
 
   .follow-us--section ul {
@@ -128,6 +159,9 @@ const basePath = import.meta.env.BASE_URL;
     display: flex;
     gap: .5rem;
     padding-left: 0px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 
   }
 
@@ -142,20 +176,14 @@ const basePath = import.meta.env.BASE_URL;
 
 
   h3.copyright {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 300;
     font-family: var(--ff-base);
     text-align: center;
-    margin: 2.5rem 0rem 2rem;
+    margin: 0.5rem 0rem 2rem;
   }
 
-@media screen and (width >= 370px) {
-  nav {
-    grid-template-columns: 50% 45%;
-    grid-template-rows: repeat(3, 1fr);
-  }
 
-}
 
 
 @media screen and (width >= 720px) {
@@ -163,7 +191,7 @@ const basePath = import.meta.env.BASE_URL;
   nav {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     max-width: 750px;
     justify-content: center;
 
@@ -174,21 +202,25 @@ const basePath = import.meta.env.BASE_URL;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
   }
 
-  ul {
-    width: 80%;
-  }
+
 
   section {
     width: 100%;
     align-items: center;
+    justify-content: flex-start;
   }
   section h2 {
     align-self: left;
     font-size: 1.1rem;
   }
+
+  .contact--section {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
   .contact--section h2 {
     width: 180px;
   }
@@ -211,33 +243,41 @@ const basePath = import.meta.env.BASE_URL;
 
 @media screen and (width >= 1150px) {
   nav {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(1, 1fr);
     max-width: 1300px;
+  }
+
+  div.wrapper {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 67%;
   }
 
   
   .client-service--section h2,
   .terms-conditions--section h2,
   .contact--section h2 {
-    width: 260px;
+    width: 100%
+    margin-top: 0px;
+    font-size: 1.3rem;
   }
 
-
+  .break-line {
+    display:  none;
+  }
 
   ul {
     padding-left: 0px;
   }
 
-  .contact--section {
-    grid-column: 2;
-    grid-row: 1;
-  }
 
-  .terms-conditions--section {
-    grid-column: 3;
-    grid-row: 1;
-  }
+
+
   .follow-us--section {
     grid-column: 4;
     grid-row: 1;
