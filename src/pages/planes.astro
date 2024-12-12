@@ -5,6 +5,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import BasicBanner from "@components/banner/BasicBanner.astro";
 import PlanDetailCard from "@components/cards/planDetail/PlanDetailCard.astro";
 import PlanDetailList from "@components/cards/planDetail/PlanDetailList.astro";
+import QuoteCalculator from "@components/quoteCalculator/QuoteCalculator.astro";
 const mainBanner = "banners/home/palm-home-banner-cl-webp.webp";
 import * as plans from "@data/plans/planInformation.md"
 import * as images from "@data/plans/planDetailImages.md"
@@ -24,6 +25,7 @@ const isOdd1 = (number) => number % 2 !== 0
   
   <section class="plan-detailed__list">
     <div class="quote__wrapper">
+      <QuoteCalculator></QuoteCalculator>
     </div>
 
 
