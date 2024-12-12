@@ -5,7 +5,7 @@ FamilyPro:
   category: Express
   recommendation: 4
   price: 350000
-  discountPercent: 12
+  discountPercent: 12.5
   discountPrice: 400000
   planRedirect: "#FamilyPro"
   whatsAppRedirect: https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar%20Pro&type=phone_number&app_absent=0
@@ -31,7 +31,7 @@ Family:
   recommendation: 3.5
   price: 300000
   discountPercent: 10
-  discountPrice: 400000
+  discountPrice: 335000
   planRedirect: "#Family"
   whatsAppRedirect: "https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar&type=phone_number&app_absent=0"
   legalRestriction: "*Aplica fines de semana sin festivo."
