@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+
+const {
+  imagePath,
+  imageAlt,
+  width,
+  height,
+  urlRedirect
+  } = Astro.props;
+---
+
+<div class="floating-button__wrapper">
+  <a
+    class="floating-button"
+    href={urlRedirect}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Image
+      src={imagePath}
+      alt={imageAlt ? imageAlt : ""}
+      width={width ? width : 200}
+      height={height ? height : 160}
+      loading="eager"
+    />
+  </a>
+</div>
+
+
+
+<style>
+  .floating-button__wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 0;
+    width: auto;
+    margin-right: 15px;
+  }
+
+  .floating-button {
+    opacity: 0.8;
+    transition: opacity ease 0.3s;
+  }
+  
+  .floating-button:hover {
+    opacity: 1;
+  }
+
+
+</style>
