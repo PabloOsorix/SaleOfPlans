@@ -257,7 +257,7 @@ promo-item-card {
     font-family: var(--ff-base);
     width: 100%;
     margin: 15px 0px;
-    -webkit-text-stroke: medium;
+
   }
 
   span.cop {
@@ -276,6 +276,8 @@ promo-item-card {
     font-size: 2.1rem;
     font-weight: 700;
     width: 100%;
+    -webkit-text-stroke: medium;
+    text-align: center;
   }
 
   span.discount__wrapper {
@@ -285,12 +287,13 @@ promo-item-card {
     font-family: var(--ff-base);
     width: 100%;
     gap: 5px;
+    padding-right: 0.6rem;
   }
 
   p.percentage {
     margin: 0px;
     color: white;
-    font-weight: 100;
+    font-weight: 500;
     background-color: var(--system-primary-backgroundColor-2);
     border-radius: 10px;
     padding: 2px 7px;
@@ -301,9 +304,8 @@ promo-item-card {
     color: #C1C5CB;
     text-decoration: line-through;
     margin: 0px;
-    font-size: 1.3rem;
-    font-weight: 200;
-    padding-right: 11px;
+    font-size: 1.4rem;
+    font-weight: 400;
   }
 
   .button__wrapper {
@@ -382,10 +384,15 @@ promo-item-card {
     color: var(--system-primary-backgroundColor-1);
   }
 
-@media screen and (width >350px) {
+@media screen and (width >340px) {
   .content {
     width: 75%;
   }
+
+  span.discount__wrapper {
+    padding-right: 1.2rem;
+  }
+
 }
 
 @media screen and (width >= 720px) {
@@ -396,6 +403,10 @@ promo-item-card {
 
   h2.price__amount { 
     font-size: 2.1rem;
+  }
+
+  span.discount__wrapper {
+    padding-right: 1rem;
   }
 
   .discount__wrapper span.amount {
