@@ -4,9 +4,9 @@ FamilyPro:
   title: Plancito Familiar Pro
   category: Express
   recommendation: 4
-  price: 350000
+  price: 400000
   discountPercent: 12.5
-  discountPrice: 400000
+  fullPaymentPrice: 350000
   planRedirect: "#FamilyPro"
   whatsAppRedirect: https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar%20Pro&type=phone_number&app_absent=0
   legalRestriction: "*Aplica fines de semana sin festivo."
@@ -29,9 +29,9 @@ Family:
   title: Plancito Familiar
   category: Express
   recommendation: 3.5
-  price: 300000
+  price: 335000
   discountPercent: 10
-  discountPrice: 335000
+  fullPaymentPrice: 300000
   planRedirect: "#Family"
   whatsAppRedirect: "https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Familiar&type=phone_number&app_absent=0"
   legalRestriction: "*Aplica fines de semana sin festivo."
@@ -55,9 +55,9 @@ Friends:
   title: Plancito Amigos
   category: Express
   recommendation: 4
-  price: 620000
+  price: 700000
   discountPercent: 11
-  discountPrice: 700000
+  fullPaymentPrice: 620000
   planRedirect: "#Friends"
   whatsAppRedirect: "https://api.whatsapp.com/send/?phone=%2B573232213828&text=Quiero%20Informacion%20del%20Plancito%20Amigos&type=phone_number&app_absent=0"
   legalRestriction: "*Aplica fines de semana sin festivo."
