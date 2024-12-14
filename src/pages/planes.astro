@@ -37,8 +37,8 @@ const isOdd1 = (number) => number % 2 !== 0
             planName={plan.title}
             planTermConditions={plan.planTermConditions}
             recommendation={plan.recommendation}
-            price={plan.price}
-            discountPrice={plan.discountPrice}
+            price={plan.fullPaymentPrice}
+            discountPrice={plan.price}
             buttonRedirect={plan.whatsAppRedirect}
             benefits={plan.benefits}
             images={imageEntries[index][0] === key ? imageEntries[index][1].images : null}
@@ -54,6 +54,15 @@ const isOdd1 = (number) => number % 2 !== 0
 
 <style>
 
+.quote__wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
 section.plan-detailed__list {
   display: flex;
   flex-direction: column;
@@ -66,15 +75,15 @@ img.palm-banner {
     object-fit: cover;
   }
 
-  span.title__cont {
-    grid-column: 2;
-    grid-row: 2;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-  }
+span.title__cont {
+  grid-column: 2;
+  grid-row: 2;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
 
   .title {
     color: white;
@@ -116,6 +125,15 @@ img.palm-banner {
   }
 
   @media screen and (width >= 1150px) {
+
+    .quote__wrapper {
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      width: 40%;
+      
+    }
+
     img.palm-banner {
       object-fit: cover;
       mask-repeat: repeat;
@@ -138,8 +156,11 @@ img.palm-banner {
       margin: 50px auto;
       align-items: unset;
     }
-
-
-
   }
+  @media screen and (width >= 1250px) {
+    .quote__wrapper {
+
+    }
+  }
+
 </style>
