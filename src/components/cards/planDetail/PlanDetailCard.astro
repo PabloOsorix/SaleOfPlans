@@ -119,11 +119,9 @@ const key = generateRandomID();
       </span>
 
       <span class="button__wrapper">
-        <a href={"#quote"}
+        <button
           class="button quotes"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Cuotas</a>
+          >Cuotas</button>
 
         <a href={buttonRedirect}
           class="button buy"
@@ -161,9 +159,19 @@ const key = generateRandomID();
       }).mount();
 
     });
+    this.quoteButton();
     }
     
     disconnectedCallback() {
+    }
+
+    quoteButton() {
+      this.querySelector(".button.quotes").addEventListener("click", () => {
+        const event = new Event("click");
+        if(window.innerWidth <= 1150) {
+          document.querySelector(".quote-button").dispatchEvent(event);
+        }
+      })
     }
   };
 
@@ -180,9 +188,9 @@ promo-detail-card {
   font-family: var(--ff-base);
   margin-top: 25px;
   box-shadow: 1px 1px 5px #a9a9a9;
-  padding: 0px 10px 15px 10px;
-  max-width: 350px;
-  border-radius: 5px;
+  padding: 0px 15px 25px 15px;
+  max-width: 320px;
+  border-radius: 20px;
 }
 
 .slider__wrapper {
@@ -191,16 +199,21 @@ promo-detail-card {
     
 }
 
+.splide__track  {
+  border-radius: 20px;
+}
+
 li.splide__slide {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 20px;
 }
 
 li.splide__slide img {
   width: 100%;
   height: auto;
-  max-height: 170px;
+  max-height: 155px;
 }
 
 :global(.splide__pagination__page) {
@@ -320,18 +333,25 @@ span.button__wrapper {
     margin-top: 10px;
   }
 
+button.button,
 a.button {
   text-decoration: none;
   width: 100%;
   padding: 7px 0px;
-  color: white;
+  font-family: var(--ff-base);
+  font-size: 1rem;
   font-weight: 600;
   text-align: center;
+  border-radius: 20px;
+  background-color: white;
+}
+
+button.button:focus-visible {
+  outline: unset;
 }
 
 
-
-a.button.quotes {
+button.button.quotes {
   border: 1px solid var(--system-primary-backgroundColor-1);
   color: var(--system-primary-backgroundColor-1);
 
@@ -352,16 +372,15 @@ a.button.buy:hover {
 
 
 
-@media screen and (width > 1250px) {
+@media screen and (width > 800px) {
 
   promo-detail-card {
     flex-direction: row;
     align-items: center;
-    width: 100%;
-    gap: 50px;
+    width: 95%;
+    gap: 15px;
     max-height: 290px;
     padding: 10px;
-    box-shadow: none;
     max-width: unset;
   }
 
@@ -371,6 +390,10 @@ a.button.buy:hover {
 
   .slider__wrapper {
     width: 40%;
+  }
+
+  .splide__track  {
+    border-radius: 15px;
   }
 
   li.splide__slide {
@@ -402,13 +425,15 @@ a.button.buy:hover {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    height: 2rem;
   }
 
   h2.plan-name.desk {
     display: block;
     margin-bottom: 5px;
     margin-top: 0px;
-    width: 100%
+    width: 75%;
+    font-size: 1.2rem;
   }
 
   h2.plan-name.mobile {
@@ -427,7 +452,8 @@ a.button.buy:hover {
   }
 
   p.information {
-    font-size: 1rem;
+    margin: 8px 0px;
+    font-size: 0.8rem;
   }
 
   section.price-and-button {
@@ -435,6 +461,7 @@ a.button.buy:hover {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding-top: 7px;
   }
 
   span.price__wrapper {
@@ -444,13 +471,13 @@ a.button.buy:hover {
 
 
   h3.price__discount {
-    font-size: 1.8rem;
+    font-size: 1.1rem;
     font-weight: 300;
     text-align: left;
   }
 
   h2.price {
-    font-size: 2.1rem;
+    font-size: 1.7rem;
   }
 
 
@@ -459,12 +486,55 @@ a.button.buy:hover {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    padding-right: 10px;
+  }
+
+  button.button,
+  a.button {
+    text-decoration: none;
+    width: 100px;
+    font-size: 0.9rem;
+  }
+
+}
+
+
+
+@media screen and (width > 1150px) {
+
+  promo-detail-card {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 50px;
+    max-height: 290px;
+    padding: 10px;
+    max-width: unset;
+  }
+
+  h2.plan-name.desk {
+    font-size: 1.5rem;
+    width: 100%
+  }
+
+  p.information {
+    font-size: 0.9rem;
+  }
+
+  h3.price__discount {
+    font-size: 1.5rem;
+  }
+
+  h2.price {
+    font-size: 2rem;
   }
 
   a.button {
     text-decoration: none;
-    width: 130px;
+    width: 120px;
+    font-size: 1rem;
   }
-
 }
+
+
 </style>
