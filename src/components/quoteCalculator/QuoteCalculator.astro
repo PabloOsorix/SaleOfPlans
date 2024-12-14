@@ -1,78 +1,278 @@
 ---
-const maxNumberOfQuotes = [2, 3, 4];
+import "@styles/global.css"
+import * as contactInformation from "@data/contact/whatsapp.md"
 import * as plans from "@data/plans/planInformation.md"
+
+
+const maxNumberOfQuotes = [2, 3, 4];
 const basePath = import.meta.env.BASE_URL;
+const whatsAppRedirect = contactInformation.frontmatter.WhatsappBaseRedirect
 const planEntries = Object.entries(plans.frontmatter)
+
 const planAndPrices = []
 planEntries.map(([key, plan]) => (
   planAndPrices.push(
     {
       title:  plan.title,
-      price: plan.price,
-      discountPercent: plan.discountPercent
+      price: plan.price
   })
 ))
+
+console.log(whatsAppRedirect)
+
 ---
 
-<section class="calculator">
-  <div class="wrapper">
+<div class="mobile-button-wrapper">
+  <button class="quote-button">Cuotas</button>
+</div>
+<section class="close-calculator__zone">
+</section>
+  <section class="calculator" data-plan-and-prices={JSON.stringify(planAndPrices)}>
+    <div class="wrapper">
 
-    <select class="plan-select">
-      <option selected disabled>Selecciona tu plan</option>
-      {
-        planEntries.map(([key, plan]) => (
-        <option value={plan.title}>{plan.title} </option>
-        ))
-      }      
-    </select>
+      <label for="plan-selector">Selecciona tu plan:</label>
+      <select class="plan-select" id="plan-selector">
+        {
+          planEntries.map(([key, plan], index) => (
+            index === 0 ?
+            <option value={plan.title} selected>{plan.title} </option>
+            :   
+            <option value={plan.title}>{plan.title} </option>
+          ))
+        }      
+      </select>
 
+      <label for="quote-selector">Selecciona tus cuotas:</label>
+      <select class="quote-select" id="quote-selector">
+        {
+          maxNumberOfQuotes.map((number, index) =>
+            index === 0 ? 
+            <option value={number} selected>{number} </option>
+            :
+            <option value={number}>{number} </option>
+          )
+        }
+      </select>
 
-    <select class="quote-select">
-      <option selected disabled>N cuotas</option>
-      {
-        maxNumberOfQuotes.map((number) =>
-          <option value={number}>{number} </option>
-        )
-      }
-    </select>
+      <div class="quote-price__wrapper">Mensualmente Paga: <span class="quote-price"></span></div>
+      <div class="price__wrapper">Precio Total: <span class="total-price"></span></div>
 
-    <div class="price__wrapper">Precio Total: <span class="total-price"></span></div>
-    <div class="price__wrapper">valor de la cuota a pagar mensualmente: <span class="quote-price"></span></div>
-  </div>
+      <a class="button"
+        href=""
+        target="_blank"
+        rel="noopener noreferrer"
+        data-base-redirect={whatsAppRedirect}
+        >¡Quiero Comprar Esta Oferta!</a>
+    </div>
 </section>
 
-<script define:vars={{planAndPrices}}>
+<script>
+  import { formatPriceToCOP } from "@utils/currency";
 
 
+const planAndPrices = JSON.parse(document.querySelector(".calculator").dataset.planAndPrices)
 const quoteSelector = document.querySelector(".quote-select");
 const planSelector = document.querySelector(".plan-select");
+const quoteButtonMobile = document.querySelector(".quote-button");
+const calculatorWrapper = document.querySelector(".close-calculator__zone");
 
-quoteSelector.addEventListener("change", () => {
-  updateQuoteCalculation()
-})
-
-planSelector.addEventListener("change", () => {
-  updateQuoteCalculation()
-})
+quoteButtonMobile.addEventListener("click", showCalcultorePopUp)
+calculatorWrapper.addEventListener("click", closeCalculatorePopUp)
+quoteSelector.addEventListener("change", updateQuoteCalculation)
+planSelector.addEventListener("change", updateQuoteCalculation)
 
 
 function updateQuoteCalculation() {
   const planName = document.querySelector(".plan-select").value;
   const quoteNumber = document.querySelector(".quote-select").value;
-
+  const button = document.querySelector(".button");
 
   const selectedPlan = planAndPrices.filter(function (plan) {
     return plan.title === planName;
   });
 
   var basePrice = selectedPlan[0].price
-  var baseDiscount = selectedPlan[0].discountPercent
-  const priceTotal = basePrice += basePrice * ( baseDiscount / 100)
-  const quotePrice = priceTotal / quoteNumber
+  
+  const priceTotal = basePrice
 
-  document.querySelector(".total-price").innerHTML = priceTotal
-  document.querySelector(".quote-price").innerHTML = quotePrice
+  const quotePriceFormated = formatPriceToCOP(priceTotal / quoteNumber)
+  const priceTotalFormated = formatPriceToCOP(basePrice)
+
+  document.querySelector(".total-price").innerHTML = priceTotalFormated + " COP";
+  document.querySelector(".quote-price").innerHTML = quotePriceFormated + "COP";
+
+
+  const baseRedirectUrl = button.dataset.baseRedirect
+  /*  %20 == is an space in ASCII, URL's needs the ASCII code
+      %0A = Break line
+  */
+  
+  const fullRedirectionURL = `${baseRedirectUrl}&text=Quiero%20Comprar%20Esta%20Oferta:%0A%0APlan:%20*${planName}*%0A%0ACuotas:%20*${quoteNumber}*%0A%0APrecio%20de%20la%20cuota%20mensual:%0A*${quotePriceFormated}*%0A%0ATotal:%20*${priceTotalFormated}*`
+  button.href = fullRedirectionURL
+}
+
+function showCalcultorePopUp() {
+  document.querySelector(".calculator").classList.add("show");
+  document.querySelector(".close-calculator__zone").classList.add("show");;
+  
 
 }
-  
+
+function closeCalculatorePopUp() {
+  document.querySelector(".calculator").classList.remove("show");
+  document.querySelector(".close-calculator__zone").classList.remove("show");;
+}
+/** It make the calculation for the initial values */
+updateQuoteCalculation()  
 </script>
+
+
+<style>
+
+
+
+  .mobile-button-wrapper {
+    position: fixed;
+    right: 0;
+    bottom: 50%;
+    height: 50px;
+    z-index: 1;
+  }
+
+  .quote-button {
+    color: white;
+    font-family: var(--ff-base-2);
+    font-weight: 600;
+    font-size: 1rem;
+    background: #ed4d3be0;
+    border: unset;
+    width: 55px;
+    height:50px;
+    border-radius: 50% 0px 0px 50%;
+  }
+
+  .close-calculator__zone {
+    display: none;
+    position: fixed;
+    height: 100%;
+    z-index: 2;
+    background: #0000005d;
+    top: 0px;
+    width: 100%;
+  }
+
+  .calculator {
+    display: none;
+    position: fixed;
+    box-shadow: 1px 1px 5px #a9a9a9;
+    border-radius: 10px;
+    padding: 10px;
+    width: 310px;
+    top: 36.4%;
+    max-height: 300px;
+    background: white;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    margin: auto;
+  }
+
+  
+  .show {
+    display: inline-block;
+  }
+
+
+  .calculator div.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  div.wrapper label {
+    font-family: var(--ff-base-2);
+    color: var(--system-clr-primaryText);
+    padding-left: 5px;
+  }
+
+  select.plan-select,
+  select.quote-select {
+    width: 170px;
+    padding: 5px;
+    font-family: var(--ff-base);
+    color: var(--system-clr-primaryText);
+    font-weight: 700;
+    box-shadow: 1px 1px 5px #a9a9a9;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  select.plan-select:focus-visible,
+  select.quote-select:focus-visible {
+    outline: 2px solid var(--system-primary-backgroundColor-1)
+  }
+
+  select option {
+    font-weight: 700;
+    color: var(--system-primary-backgroundColor-1);
+  }
+
+  .price__wrapper {
+    font-size: 1rem;
+  }
+
+  .price__wrapper,
+  .quote-price__wrapper {
+    padding: 5px;
+    font-family: var(--ff-base-2);
+    color: var(--system-clr-primaryText);
+  }
+
+  
+  .quote-price,
+  .total-price {
+    color: var(--system-primary-backgroundColor-5);
+    font-family: var(--ff-base-2);
+    font-weight: 500;
+    font-size: 1.2rem;
+    padding-left: 5px;
+    font-weight: bold;
+  }
+
+  .total-price {
+    color: var(--system-clr-primaryText);
+    font-size: 1rem;
+  }
+  
+  a.button {
+    font-family: var(--ff-base-2);
+    color: white;
+    background-color: var(--system-primary-backgroundColor-5);
+    padding: 7px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    margin: 10px auto;
+  }
+
+
+  @media screen and (width >= 1150px) {
+
+    .calculator {
+      width: 300px;
+      position: sticky;
+      top: 36.4%;
+      display: inline-block;
+      margin: unset;
+      margin-top: 2rem;
+  }
+  .mobile-button-wrapper {
+    display: none;
+  }
+}
+
+</style>
