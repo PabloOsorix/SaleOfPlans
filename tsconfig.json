@@ -12,7 +12,8 @@
       "@scripts/*": ["src/scripts/*"],
       "@utils/*": ["src/utils/*"],
       "@public/*": ["public/*"],
-      "@data/*": ["data/*"]
+      "@data/*": ["data/*"],
+      "@events/*": ["src/events/*"],
     }
   }
 }
