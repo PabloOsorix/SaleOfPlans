@@ -18,7 +18,6 @@ planEntries.map(([key, plan]) => (
   })
 ))
 
-console.log(whatsAppRedirect)
 
 ---
 
@@ -68,62 +67,79 @@ console.log(whatsAppRedirect)
 
 <script>
   import { formatPriceToCOP } from "@utils/currency";
-
-
-const planAndPrices = JSON.parse(document.querySelector(".calculator").dataset.planAndPrices)
-const quoteSelector = document.querySelector(".quote-select");
-const planSelector = document.querySelector(".plan-select");
-const quoteButtonMobile = document.querySelector(".quote-button");
-const calculatorWrapper = document.querySelector(".close-calculator__zone");
-
-quoteButtonMobile.addEventListener("click", showCalcultorePopUp)
-calculatorWrapper.addEventListener("click", closeCalculatorePopUp)
-quoteSelector.addEventListener("change", updateQuoteCalculation)
-planSelector.addEventListener("change", updateQuoteCalculation)
-
-
-function updateQuoteCalculation() {
-  const planName = document.querySelector(".plan-select").value;
-  const quoteNumber = document.querySelector(".quote-select").value;
-  const button = document.querySelector(".button");
-
-  const selectedPlan = planAndPrices.filter(function (plan) {
-    return plan.title === planName;
-  });
-
-  var basePrice = selectedPlan[0].price
-  
-  const priceTotal = basePrice
-
-  const quotePriceFormated = formatPriceToCOP(priceTotal / quoteNumber)
-  const priceTotalFormated = formatPriceToCOP(basePrice)
-
-  document.querySelector(".total-price").innerHTML = priceTotalFormated + " COP";
-  document.querySelector(".quote-price").innerHTML = quotePriceFormated + "COP";
-
-
-  const baseRedirectUrl = button.dataset.baseRedirect
-  /*  %20 == is an space in ASCII, URL's needs the ASCII code
-      %0A = Break line
-  */
-  
-  const fullRedirectionURL = `${baseRedirectUrl}&text=Quiero%20Comprar%20Esta%20Oferta:%0A%0APlan:%20*${planName}*%0A%0ACuotas:%20*${quoteNumber}*%0A%0APrecio%20de%20la%20cuota%20mensual:%0A*${quotePriceFormated}*%0A%0ATotal:%20*${priceTotalFormated}*`
-  button.href = fullRedirectionURL
-}
-
-function showCalcultorePopUp() {
-  document.querySelector(".calculator").classList.add("show");
-  document.querySelector(".close-calculator__zone").classList.add("show");;
+  import { openRequestedPlan, newSelectedPlan } from "@events/quoteCalculator"
   
 
-}
+  const planAndPrices = JSON.parse(document.querySelector(".calculator").dataset.planAndPrices)
+  const quoteSelector = document.querySelector(".quote-select");
+  const planSelector = document.querySelector(".plan-select");
+  const quoteButtonMobile = document.querySelector(".quote-button");
+  const calculatorWrapper = document.querySelector(".close-calculator__zone");
 
-function closeCalculatorePopUp() {
-  document.querySelector(".calculator").classList.remove("show");
-  document.querySelector(".close-calculator__zone").classList.remove("show");;
-}
-/** It make the calculation for the initial values */
-updateQuoteCalculation()  
+  /* Events for show or hide*/
+  quoteButtonMobile.addEventListener("click", showCalcultorePopUp)
+  calculatorWrapper.addEventListener("click", closeCalculatorePopUp)
+  /* Events for re-render*/
+  quoteSelector.addEventListener("change", updateQuoteCalculation)
+  planSelector.addEventListener("change", updateQuoteCalculation)
+
+
+  /**
+   * updateQuoteCalculation: function that updates the calculous of the mensual quote
+   * and total price to pay
+   */
+  function updateQuoteCalculation() {
+    const planName = document.querySelector(".plan-select").value;
+    const quoteNumber = document.querySelector(".quote-select").value;
+    const button = document.querySelector(".button");
+
+    const selectedPlan = planAndPrices.filter(function (plan) {
+      return plan.title === planName;
+    });
+
+    var basePrice = selectedPlan[0].price
+    
+    const priceTotal = basePrice
+
+    const quotePriceFormated = formatPriceToCOP(priceTotal / quoteNumber)
+    const priceTotalFormated = formatPriceToCOP(basePrice)
+
+    document.querySelector(".total-price").innerHTML = priceTotalFormated + " COP";
+    document.querySelector(".quote-price").innerHTML = quotePriceFormated + "COP";
+
+
+    const baseRedirectUrl = button.dataset.baseRedirect
+    /*  %20 == is an space in ASCII, URL's needs the ASCII code
+        %0A = Break line
+    */
+    
+    const fullRedirectionURL = `${baseRedirectUrl}&text=Quiero%20Comprar%20Esta%20Oferta:%0A%0APlan:%20*${planName}*%0A%0ACuotas:%20*${quoteNumber}*%0A%0APrecio%20de%20la%20cuota%20mensual:%0A*${quotePriceFormated}*%0A%0ATotal:%20*${priceTotalFormated}*`
+    button.href = fullRedirectionURL
+  }
+
+  function showCalcultorePopUp() {
+    document.querySelector(".calculator").classList.add("show");
+    document.querySelector(".close-calculator__zone").classList.add("show");;
+  }
+
+  function closeCalculatorePopUp() {
+    document.querySelector(".calculator").classList.remove("show");
+    document.querySelector(".close-calculator__zone").classList.remove("show");;
+  }
+  /** It make the calculation for the initial values */
+  updateQuoteCalculation()
+  
+
+  /** This function launches and event that listen if there is some
+    * request for update the plan option and update it.
+    */
+  openRequestedPlan(".plan-select")
+
+  /** This function launches an event that listens if the available plan
+   * are changed then re render the calculous and show the mobile pop up
+   */
+  newSelectedPlan(() => {updateQuoteCalculation(); showCalcultorePopUp();})
+
 </script>
 
 
@@ -217,7 +233,7 @@ updateQuoteCalculation()
 
   select option {
     font-weight: 700;
-    color: var(--system-primary-backgroundColor-1);
+    color: var(--system-clr-primaryText);
   }
 
   .price__wrapper {
