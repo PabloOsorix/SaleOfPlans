@@ -53,6 +53,7 @@ const key = generateRandomID();
   id={customClass}
   data-key={key}
   class:list={{"reverse-card": reverse}}
+  data-plan-name={planName}
   >
   <h2 class="plan-name mobile">{planName}</h2>
   <section class="slider__wrapper">
@@ -112,15 +113,25 @@ const key = generateRandomID();
 
     <section class="price-and-button">
       
-      <span class="price__wrapper">
-        <h3 class="price__discount">${formatPriceToCOP(discountPrice)}COP</h3>
-        <h2 class="price">${formatPriceToCOP(price)}COP</h2>
-        <p  class="price__disclaimer">*Pago inmediato</p>
-      </span>
+      <div class="price__wrapper">
+        <span class="total">
+          <h3 class="price__total">
+            ${formatPriceToCOP(discountPrice)}<span class="cop">COP</span>
+          </h3>
+          <p  class="price__disclaimer total">*Pago Diferido</p>
+        </span>
+        <span class="discount">
+        <h2 class="price__discount">
+          ${formatPriceToCOP(price)}<span class="cop">COP</span>
+        </h2>
+        <p  class="price__disclaimer discount">*Pago inmediato</p>
+        </span>
+
+      </div>
 
       <span class="button__wrapper">
         <button
-          class="button quotes"
+          class={"button quotes " + key}
           >Cuotas</button>
 
         <a href={buttonRedirect}
@@ -138,6 +149,7 @@ const key = generateRandomID();
 
 <script>
   import Splide from "@splidejs/splide";
+  import { requestOpenSelectedPlan } from "@events/quoteCalculator.js"
 
   class  PromoDetailCard extends HTMLElement {
     constructor() {
@@ -146,6 +158,14 @@ const key = generateRandomID();
     }
 
     connectedCallback() {
+      this.render()
+
+    }
+    
+    disconnectedCallback() {
+    }
+
+    render() {
       const key = this.dataset.key;
       document.addEventListener("DOMContentLoaded", () => {
       const splide = new Splide(`.splide.${key}`, {
@@ -161,17 +181,11 @@ const key = generateRandomID();
     });
     this.quoteButton();
     }
-    
-    disconnectedCallback() {
-    }
 
     quoteButton() {
-      this.querySelector(".button.quotes").addEventListener("click", () => {
-        const event = new Event("click");
-        if(window.innerWidth <= 1150) {
-          document.querySelector(".quote-button").dispatchEvent(event);
-        }
-      })
+      if(window.innerWidth <= 1150) {
+        requestOpenSelectedPlan(`.button.quotes.${this.dataset.key}`, this.dataset.planName)
+      }
     }
   };
 
@@ -288,41 +302,52 @@ p.information {
     font-weight: 500;
 }
 
-span.price__wrapper {
+div.price__wrapper {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  font-style: italic;
 }
 
-h3.price__discount {
-  color: #C1C5CB;
-  text-decoration: line-through;
-  margin: 0px;
-  font-size: 1.6rem;
-  font-weight: 300;
-  text-align: right;
-  width: 100%;
-}
 
-h2.price {
+
+h2.price__discount {
   margin: 0px;
-  color: var(--system-primary-backgroundColor-1);
+  color: var(--system-primary-backgroundColor-5);
   margin-bottom: 0px;
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 600;
   text-align: right;
   width: 100%;
+}
+
+h3.price__total {
+  color: var(--system-primary-backgroundColor-1);
+  margin: 0px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: right;
+  width: 100%;
+}
+
+span.cop {
+  font-size: 1rem;
 }
 
 p.price__disclaimer {
     margin: 0px;
-    color: var(--system-primary-backgroundColor-1);
-    font-size: 0.8rem;
-    text-align: right;
-    justify-self: flex-end;
+    font-weight: 600;
+    color: var(--system-primary-backgroundColor-5);
+    font-size: 0.9rem;
     width: 100%;
+}
+p.price__disclaimer.discount {
+  text-align: right;
+}
+
+p.price__disclaimer.total {
+  color: var(--system-primary-backgroundColor-1);
+  text-align: left;
 }
 
 span.button__wrapper {
@@ -352,6 +377,7 @@ button.button:focus-visible {
 
 
 button.button.quotes {
+  cursor: pointer;
   border: 1px solid var(--system-primary-backgroundColor-1);
   color: var(--system-primary-backgroundColor-1);
 
@@ -464,19 +490,19 @@ a.button.buy:hover {
     padding-top: 7px;
   }
 
-  span.price__wrapper {
+  div.price__wrapper {
     justify-content: space-between;
   }
 
 
 
-  h3.price__discount {
+  h3.price__total {
     font-size: 1.1rem;
     font-weight: 300;
     text-align: left;
   }
 
-  h2.price {
+  h2.price__discount {
     font-size: 1.7rem;
   }
 
@@ -521,11 +547,11 @@ a.button.buy:hover {
     font-size: 0.9rem;
   }
 
-  h3.price__discount {
+  h3.price__total {
     font-size: 1.5rem;
   }
 
-  h2.price {
+  h2.price__discount {
     font-size: 2rem;
   }
 
