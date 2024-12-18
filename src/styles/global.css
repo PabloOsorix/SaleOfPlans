@@ -51,7 +51,7 @@ main {
     flex: 1;
 }
 
-a {
+a, button {
     -webkit-tap-highlight-color: transparent;
 }
 
