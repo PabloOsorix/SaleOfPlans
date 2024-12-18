@@ -45,7 +45,23 @@ const {
 } = Astro.props
 
 const key = generateRandomID();
+
+function showResumeTermCondiitons() {
+  const splitTerms = planTermConditions.split(" ")
+  var resume = ""
+  for(var index = 0; index <= splitTerms.length; ++index) {
+    if (splitTerms[index].toString() === "2025.") {
+        resume += splitTerms[index] + "..."
+        return resume;
+    }
+    resume += splitTerms[index] + " "
+  }
+}
+
 ---
+
+
+
 
 <promo-detail-card
   class={"plan-detail-card" + " " + customClass}
@@ -54,8 +70,10 @@ const key = generateRandomID();
   data-key={key}
   class:list={{"reverse-card": reverse}}
   data-plan-name={planName}
+  data-term-conditions={planTermConditions}
   >
   <h2 class="plan-name mobile">{planName}</h2>
+  
   <section class="slider__wrapper">
     <div id="splide" class={"splide" + " " + key}>
       <div class="splide__track">
@@ -107,42 +125,58 @@ const key = generateRandomID();
     </section>
 
     <section class="terms-and-conditions">
-      <p class="information">{planTermConditions}</p>
+      <span class="information"  set:html={showResumeTermCondiitons()}>
+      </span>
+      <button class={"terms-conditions" + " " + key}>
+        Ver terminos y Condiciones
+      </button>
 
     </section>
 
     <section class="price-and-button">
       
       <div class="price__wrapper">
-        <span class="total">
-          <h3 class="price__total">
-            ${formatPriceToCOP(discountPrice)}<span class="cop">COP</span>
-          </h3>
-          <p  class="price__disclaimer total">*Pago Diferido</p>
-        </span>
-        <span class="discount">
-        <h2 class="price__discount">
-          ${formatPriceToCOP(price)}<span class="cop">COP</span>
-        </h2>
-        <p  class="price__disclaimer discount">*Pago inmediato</p>
-        </span>
+        <div class="total">
+          <span>
+            <p  class="price__disclaimer total">Pago Diferido</p>
+            <h3 class="price__total">
+              ${formatPriceToCOP(discountPrice)}<span class="cop">COP</span>
+            </h3>
+
+          </span>
+          <button
+          class={"button quotes " + key}
+          >Cuotas
+          </button>
+        </div>
+
+
+        <div class="discount">
+          <span>
+          <p  class="price__disclaimer discount">Pago inmediato</p>
+          <h2 class="price__discount">
+            ${formatPriceToCOP(price)}<span class="cop">COP</span>
+          </h2>
+          </span>
+          <a href={buttonRedirect}
+          class="button buy"
+          target="_blank"
+          rel="noopener noreferrer"
+          >¡Compra Ya!</a>
+        </div>
 
       </div>
 
       <span class="button__wrapper">
-        <button
-          class={"button quotes " + key}
-          >Cuotas</button>
 
-        <a href={buttonRedirect}
-          class="button buy"
-          target="_blank"
-          rel="noopener noreferrer"
-        >¡Compra Ya!</a>
+
+
       </span>
 
     </section>
   </section>
+
+
 </promo-detail-card>
 
 
@@ -150,6 +184,9 @@ const key = generateRandomID();
 <script>
   import Splide from "@splidejs/splide";
   import { requestOpenSelectedPlan } from "@events/quoteCalculator.js"
+  import { requestOpenTermsConditionsPopUp } from "@events/termConditionPopUp";
+
+
 
   class  PromoDetailCard extends HTMLElement {
     constructor() {
@@ -180,29 +217,41 @@ const key = generateRandomID();
 
     });
     this.quoteButton();
+    this.termsConditions();
     }
 
     quoteButton() {
-      if(window.innerWidth <= 1150) {
         requestOpenSelectedPlan(`.button.quotes.${this.dataset.key}`, this.dataset.planName)
-      }
     }
+
+    termsConditions() {
+      requestOpenTermsConditionsPopUp(`.terms-conditions.${this.dataset.key}`, {
+          title: this.dataset.planName,
+          description: this.dataset.termConditions
+      })
+    }
+    
   };
 
   customElements.define('promo-detail-card', PromoDetailCard);
+  
 
 </script>
 
 
 
 <style>
+
+
+
+
 promo-detail-card {
   display: flex;
   flex-direction: column;
   font-family: var(--ff-base);
   margin-top: 25px;
   box-shadow: 1px 1px 5px #a9a9a9;
-  padding: 0px 15px 25px 15px;
+  padding: 5px 0px 15px;
   max-width: 320px;
   border-radius: 20px;
 }
@@ -214,7 +263,6 @@ promo-detail-card {
 }
 
 .splide__track  {
-  border-radius: 20px;
 }
 
 li.splide__slide {
@@ -238,7 +286,9 @@ li.splide__slide img {
   background: var(--system-primary-backgroundColor-1);
 }
 
-
+section.information__wrapper {
+  padding: 0px 15px; 
+}
 
 section.title-and-benefits {
     display: flex;
@@ -289,26 +339,53 @@ h2.plan-name.desk {
 h2.plan-name.mobile {
   margin: 10px 0px;
   font-size: 1.5rem;
-  text-align: left;
+  text-align: center;
   width: 100%;
 }
 
 
-p.information {
+span.information {
     font-family: var(--ff-base);
     color: var(--system-clr-primaryText);
     text-align: left;
     font-size: 0.9rem;
     font-weight: 500;
 }
+span.information > strong {
+  font-weight: inherit;
+}
+
+button.terms-conditions {
+  color: var(--system-primary-backgroundColor-1);
+  text-decoration: underline;
+  font-style: italic;
+  font-weight: 500;
+  background-color: unset;
+  border: unset;
+  cursor: pointer;
+  padding: 0px;
+}
+
+button.terms-conditions:focus-visible {
+  outline: unset;
+}
 
 div.price__wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+  margin: 35px 0px 15px;
 }
 
+div.price__wrapper div.total,
+div.price__wrapper div.discount  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
 
 h2.price__discount {
@@ -321,11 +398,13 @@ h2.price__discount {
   width: 100%;
 }
 
+
+
 h3.price__total {
   color: var(--system-primary-backgroundColor-1);
   margin: 0px;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 400;
   text-align: right;
   width: 100%;
 }
@@ -341,27 +420,18 @@ p.price__disclaimer {
     font-size: 0.9rem;
     width: 100%;
 }
-p.price__disclaimer.discount {
-  text-align: right;
-}
 
 p.price__disclaimer.total {
   color: var(--system-primary-backgroundColor-1);
   text-align: left;
 }
 
-span.button__wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-  }
+
 
 button.button,
 a.button {
   text-decoration: none;
-  width: 100%;
+  width: 120px;
   padding: 7px 0px;
   font-family: var(--ff-base);
   font-size: 1rem;
@@ -371,27 +441,33 @@ a.button {
   background-color: white;
 }
 
+button.button.quotes {
+  cursor: pointer;
+  border: 1px solid var(--system-primary-backgroundColor-1);
+  color: var(--system-primary-backgroundColor-1);
+  -webkit-tap-highlight-color: transparent;
+
+}
+
+button.button.quotes:hover {
+  color: white;
+  background-color: var(--system-primary-backgroundColor-1);
+}
+
 button.button:focus-visible {
   outline: unset;
 }
 
 
-button.button.quotes {
-  cursor: pointer;
-  border: 1px solid var(--system-primary-backgroundColor-1);
-  color: var(--system-primary-backgroundColor-1);
-
-}
-
 a.button.buy {
   border: 1px solid var(--system-primary-backgroundColor-5);
-  color: var(--system-primary-backgroundColor-5)
-
+  color: white;
+  background: var(--system-primary-backgroundColor-5);
 }
 
 a.button.buy:hover {
-  color: white;
-  background: var(--system-primary-backgroundColor-5);
+  color: var(--system-primary-backgroundColor-5);
+  background: white;
 }
 
 
@@ -404,7 +480,7 @@ a.button.buy:hover {
     flex-direction: row;
     align-items: center;
     width: 95%;
-    gap: 15px;
+    gap: 30px;
     max-height: 290px;
     padding: 10px;
     max-width: unset;
@@ -443,6 +519,8 @@ a.button.buy:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0px;
+
   }
 
   section.title-and-benefits {
@@ -477,7 +555,7 @@ a.button.buy:hover {
     width: 100%;
   }
 
-  p.information {
+  span.information {
     margin: 8px 0px;
     font-size: 0.8rem;
   }
@@ -492,18 +570,28 @@ a.button.buy:hover {
 
   div.price__wrapper {
     justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    margin: 15px 0px;
   }
+
+  div.price__wrapper div.total,
+  div.price__wrapper div.discount {
+    flex-direction: column;
+    align-items: center;
+  }
+
 
 
 
   h3.price__total {
-    font-size: 1.1rem;
-    font-weight: 300;
+    font-size: 1.5rem;
     text-align: left;
+    font-weight: 600;
   }
 
   h2.price__discount {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
 
 
@@ -518,7 +606,7 @@ a.button.buy:hover {
   button.button,
   a.button {
     text-decoration: none;
-    width: 100px;
+    width: 150px;
     font-size: 0.9rem;
   }
 
@@ -532,33 +620,37 @@ a.button.buy:hover {
     flex-direction: row;
     align-items: center;
     width: 100%;
-    gap: 50px;
+    gap: 30px;
     max-height: 290px;
     padding: 10px;
     max-width: unset;
   }
 
   h2.plan-name.desk {
-    font-size: 1.5rem;
-    width: 100%
+    font-size: 1.1rem;
+    width: 70%;
   }
 
-  p.information {
+  span.information {
     font-size: 0.9rem;
   }
 
-  h3.price__total {
-    font-size: 1.5rem;
-  }
-
+  h3.price__total,
   h2.price__discount {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
-  a.button {
-    text-decoration: none;
-    width: 120px;
+  button.button,
+  a.button  {
+    width: 170px;
     font-size: 1rem;
+  }
+}
+
+@media screen and (width > 1250px) {
+  h2.plan-name.desk {
+    font-size: 1.3rem;
+    width: 85%;
   }
 }
 
