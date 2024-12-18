@@ -1,0 +1,136 @@
+<section class="close-terms-conditions__zone">
+</section>
+<section class="terms-conditions-popup">
+  <div class="title_wrapper">
+    <h2 class="title"></h2>
+    <button class="close_popup">X</button>
+  </div>
+
+  <div class="description">
+  </div>
+</section>
+
+<script>
+
+import { setTermsConditionPopUp, openTermsConditionsPopUp } from "@events/termConditionPopUp";
+
+function showTermsConditionsPopUp() {
+    document.querySelector(".terms-conditions-popup").classList.add("show");
+    document.querySelector(".close-terms-conditions__zone").classList.add("show");
+    document.querySelector("body").style.overflow = "hidden";
+}
+
+function closeTermsConditionsPopUp() {
+    document.querySelector(".terms-conditions-popup").classList.remove("show");
+    document.querySelector(".close-terms-conditions__zone").classList.remove("show");
+    document.querySelector("body").style.overflow = "unset";
+}
+
+setTermsConditionPopUp("terms-conditions-popup");
+openTermsConditionsPopUp(showTermsConditionsPopUp);
+
+document.querySelector(".close-terms-conditions__zone").addEventListener(
+    "click", closeTermsConditionsPopUp)
+document.querySelector(".close_popup").addEventListener(
+    "click", closeTermsConditionsPopUp)
+</script>
+
+<style>
+
+.close-terms-conditions__zone {
+    display: none;
+    position: fixed;
+    height: 100%;
+    z-index: 2;
+    background: #0000005d;
+    top: 0px;
+    width: 100%;
+}
+
+
+
+
+.terms-conditions-popup {
+  display: none;
+  position: fixed;
+  font-family: var(--ff-base-2);
+  border-radius: 5px;
+  padding: 15px 20px 20px;
+  width: 95%;
+  max-width: 320px;
+  top: 20%;
+  background: white;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  margin: auto;
+}
+
+.terms-conditions-popup button.close_popup {
+  position: absolute;
+  width: 27px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  right: 0;
+  top: 0;
+  border: unset;
+  background: var(--system-primary-backgroundColor-1);
+  color: white;
+  cursor: pointer;
+}
+
+div.title_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--system-primary-backgroundColor-1);
+  position: relative;
+  margin: 0px 0px 10px;
+}
+
+.terms-conditions-popup h2.title {
+  margin: 0px;
+  color: var(--system-primary-backgroundColor-1);
+  margin: 10px 0px;
+}
+
+
+
+.terms-conditions-popup div.description {
+  color: var(black);
+  font-size: 0.9rem;
+  line-height: 18px;
+}
+
+.terms-conditions-popup div.description > ul {
+
+}
+
+
+.show {
+  display: inline-block;
+}
+
+
+@media screen and (width >= 600px) {
+    .terms-conditions-popup {
+        max-width: 600px;
+    }
+}
+
+
+@media screen and (width >= 800px) {
+  .terms-conditions-popup {
+    width: 100%;
+    top: 30%;
+  }
+}
+
+
+@media screen and (width >= 1150px){
+  .close-terms-conditions__zone {
+    inset: 0;
+  }
+}
+
+</style>
