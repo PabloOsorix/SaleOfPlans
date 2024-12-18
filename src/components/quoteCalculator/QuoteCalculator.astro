@@ -138,7 +138,10 @@ planEntries.map(([key, plan]) => (
   /** This function launches an event that listens if the available plan
    * are changed then re render the calculous and show the mobile pop up
    */
-  newSelectedPlan(() => {updateQuoteCalculation(); showCalcultorePopUp();})
+  newSelectedPlan(() => {
+    updateQuoteCalculation();
+    window.innerWidth <= 1150 ? showCalcultorePopUp() : null
+  })
 
 </script>
 
@@ -266,7 +269,7 @@ planEntries.map(([key, plan]) => (
   a.button {
     font-family: var(--ff-base-2);
     color: white;
-    background-color: var(--system-primary-backgroundColor-5);
+    background-color: var(--system-primary-backgroundColor-1);
     padding: 7px 10px;
     border-radius: 10px;
     font-weight: 600;
