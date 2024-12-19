@@ -119,12 +119,14 @@ planEntries.map(([key, plan]) => (
 
   function showCalcultorePopUp() {
     document.querySelector(".calculator").classList.add("show");
-    document.querySelector(".close-calculator__zone").classList.add("show");;
+    document.querySelector(".close-calculator__zone").classList.add("show");
+    document.querySelector("body").style.overflow = "hidden";
   }
 
   function closeCalculatorePopUp() {
     document.querySelector(".calculator").classList.remove("show");
-    document.querySelector(".close-calculator__zone").classList.remove("show");;
+    document.querySelector(".close-calculator__zone").classList.remove("show");
+    document.querySelector("body").style.overflow = "unset";
   }
   /** It make the calculation for the initial values */
   updateQuoteCalculation()
