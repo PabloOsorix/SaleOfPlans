@@ -18,14 +18,16 @@
     --system-primary-backgroundColor-6: #DBED3B;
     --system-primary-backgroundColor-7: #82ED3B;
     --system-primary-backgroundColor-8: #3BED4D;
+    --system-secondary-Text-1: #1462D9;
 
+    --system-clr-primaryText: #465A77;
+    --system-secundary-color-subtitle: var(--system-secondary-Text-1);
     
     --clr-pry-base-3: #e8e8e8;
 
-    --system-clr-primaryText: #465A77;
-
     --ff-base: "Quicksand", sans-serif;
     --ff-base-2: "Lato", sans-serif;
+    --ff-base-3: 'Aptos', sans-serif;
     --ff-baseWght-800: 800;
     --ff-baseSize-M: 1.5rem;
 
