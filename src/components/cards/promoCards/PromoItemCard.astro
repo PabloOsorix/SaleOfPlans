@@ -80,7 +80,7 @@ const sinteticID = generateRandomID()
         <section class="price">
           <h2 class="price__amount">$ {formatPriceToCOP(price)} COP</h2>
           <span class="discount__wrapper">
-            <p class="percentage">-{discountPercent}%</p>
+            <p class="alternative">diferido</p>
             <span class="amount">{formatPriceToCOP(discountPrice)}COP</span>
           </span>
         </section>
@@ -290,7 +290,8 @@ promo-item-card {
     padding-right: 0.6rem;
   }
 
-  p.percentage {
+
+  p.alternative {
     margin: 0px;
     color: white;
     font-weight: 500;
@@ -301,11 +302,11 @@ promo-item-card {
   }
 
   .discount__wrapper span.amount {
-    color: #C1C5CB;
-    text-decoration: line-through;
+    font-family: var(--ff-base-2);
+    color: var(--system-clr-primaryText);
     margin: 0px;
     font-size: 1.4rem;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   .button__wrapper {
@@ -375,7 +376,7 @@ promo-item-card {
   }
 
   .legal a,
-  .apply-terms a{
+  .apply-terms a {
     display: inline-block;
     width: 100%;
     text-align: center;
@@ -403,7 +404,6 @@ promo-item-card {
 
   h2.price__amount { 
     font-size: 2.1rem;
-    -webkit-text-stroke: medium;
   }
 
   span.discount__wrapper {
