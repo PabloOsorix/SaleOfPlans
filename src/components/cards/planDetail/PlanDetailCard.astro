@@ -49,7 +49,7 @@ const key = generateRandomID();
 function showResumeTermCondiitons() {
   const splitTerms = planTermConditions.split(" ")
   var resume = ""
-  for(var index = 0; index <= splitTerms.length; ++index) {
+  for(var index = 0; index < splitTerms.length; ++index) {
     if (splitTerms[index].toString() === "2025.") {
         resume += splitTerms[index] + "..."
         return resume;
@@ -353,7 +353,7 @@ span.information {
 }
 
 button.terms-conditions {
-  color: var(--system-primary-backgroundColor-1);
+  color: #465a77b3;
   text-decoration: underline;
   font-style: italic;
   font-weight: 500;
