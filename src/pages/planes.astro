@@ -12,8 +12,17 @@ import * as plans from "@data/plans/planInformation.md"
 import * as images from "@data/plans/planDetailImages.md"
 const planEntries = Object.entries(plans.frontmatter)
 const imageEntries = Object.entries(images.frontmatter)
-const isOdd1 = (number) => number % 2 !== 0 
+const isOdd1 = (number) => number % 2 !== 0
 
+
+const findImagesByPlanName = (planKey) => {
+  for(var key = 0; key <= imageEntries.length; ++key) {
+    if(imageEntries[key][0] === planKey) {
+      return imageEntries[key][1].images
+    }
+  }
+  return null
+}
 ---
 
 <BaseLayout title="Planes">
@@ -43,7 +52,7 @@ const isOdd1 = (number) => number % 2 !== 0
             discountPrice={plan.price}
             buttonRedirect={plan.whatsAppRedirect}
             benefits={plan.benefits}
-            images={imageEntries[index][0] === key ? imageEntries[index][1].images : null}
+            images={findImagesByPlanName(key)}
             reverse={isOdd(index)}
             >
           </PlanDetailCard>
@@ -159,10 +168,7 @@ span.title__cont {
       align-items: unset;
     }
   }
-  @media screen and (width >= 1250px) {
-    .quote__wrapper {
 
-    }
-  }
+
 
 </style>
