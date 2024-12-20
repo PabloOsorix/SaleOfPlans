@@ -315,12 +315,16 @@ planEntries.map(([key, plan]) => (
       position: sticky;
       top: 36.4%;
       display: inline-block;
-      visibility: hidden;
+      visibility: visible;
       opacity: 1;
       margin: unset;
       margin-top: 2rem;
   }
     .mobile-button-wrapper {
+      display: none;
+    }
+
+    button.close_calculator_popup {
       display: none;
     }
 }
