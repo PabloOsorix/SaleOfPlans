@@ -1,103 +1,469 @@
 ---
+import "@styles/global.css";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import BasicBanner from "@components/banner/BasicBanner.astro";
+import Accordion from "@components/accordion/Accordion.astro";
 const mainBanner = "banners/home/palm-home-banner-cl-webp.webp";
 ---
 
-<BaseLayout title="Planes">
-  <BasicBanner image={mainBanner} class={"palm-banner"}>
-    <span class="title__cont">
-      <h2 class="title">Plancitos.com</h2>
-      <h3 class="sub-title">
-        Tu plan: <span>Fácil - Rapido - Sin rollos</span>
-      </h3>
-    </span>
-  </BasicBanner>
-  <h2 class="terms-title">Terminos y condiciones</h2>
+<BaseLayout title="Terminos y condiciones">
+  <section class="terms-wrapper w-max">
+    <h2 class="terms-title">Terminos y condiciones</h2>
+    <p class="text-intro">
+      Bienvenido a Plancitos.com. Este documento describe los términos y
+      condiciones que rigen el uso de nuestros servicios. Su objetivo es ofrecer
+      claridad sobre las reglas y directrices aplicables al uso de nuestro
+      servicio, promoviendo una experiencia segura y transparente para todos los
+      usuarios.
+    </p>
 
-  <style>
-    section.plan-detailed__list {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+    <h3 class="subtitle">Plancitos.com como Intermediario</h3>
+    <p>
+      Plancitos.com actúa exclusivamente como intermediario entre el cliente y
+      los proveedores de servicios turísticos, incluyendo hoteles y operadores
+      locales. La prestación de servicios como hospedaje, alimentación,
+      transporte y actividades turísticas es responsabilidad directa de los
+      proveedores.
+    </p>
 
-    img.palm-banner {
-      filter: brightness(0.8);
-      object-fit: cover;
-    }
+    <p class="list-paragraph"></p>
 
-    span.title__cont {
-      grid-column: 2;
-      grid-row: 2;
+    <button class="accordion"
+      >Plancitos.com no será responsable de:</button
+    >
+    <div class="panel">
+      <ul class="list">
+        <li>
+          La calidad o condiciones de los servicios ofrecidos por terceros.
+        </li>
+        <li>
+          Retrasos, cancelaciones o inconvenientes causados por eventos fuera de
+          su control, incluyendo fuerza mayor o caso fortuito.
+        </li>
+        <li>
+          Resolución de reclamos relacionados con los servicios contratados, los
+          cuales deberán ser gestionados directamente con el proveedor
+          correspondiente
+        </li>
+      </ul>
+    </div>
 
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-    }
+    <button class="accordion">Pagos Fraccionados (Cuotas):</button>
+    <div class="panel">
+      <p>Para reservas realizadas con más de 45 días de antelación</p>
+      <p>
+        El cliente podrá optar por un plan de pagos fraccionados bajo las
+        siguientes condiciones:
+      </p>
+      <ul class="list">
+        <li>
+          <strong>Pago inicial:</strong> Se deberá realizar un pago inicial que corresponde
+          a una cuota del plan de pagos diferido para garantizar la reserva.
+        </li>
+        <li>
+          <strong>Cuotas mensuales:</strong> El saldo restante se pagará en cuotas
+          iguales no mayor a un plazo de 4 meses, completando el 100% del valor del
+          paquete al menos siete (7) días calendario antes de la fecha del viaje.
+        </li>
+        <li>
+          <strong>Incumplimiento:</strong> Si el cliente no cumple con los plazos
+          de pago, Plancitos.com se reserva el derecho de cancelar la reserva y aplicar
+          las penalidades correspondientes.
+        </li>
+      </ul>
+    </div>
 
-    .title {
-      color: white;
-      font-size: 3rem;
-      font-family: var(--ff-base);
-      font-weight: 700;
-      margin: 0px;
-      -webkit-text-stroke: thin;
-    }
-    .sub-title {
-      margin: 0px;
-      text-align: left;
-      font-family: var(--ff-base-2);
-      font-style: italic;
-      color: white;
-    }
-    .sub-title span {
-      color: white;
-    }
+    <button class="accordion"
+      >Reservas con viajes en menos de un mes:</button
+    >
+    <div class="panel">
+      <p>Para reservas realizadas con más de 45 días de antelación</p>
+      <p>
+        El cliente podrá optar por un plan de pagos fraccionados bajo las
+        siguientes condiciones:
+      </p>
+      <ul class="list">
+        <li>
+          <strong>Es necesario:</strong> realizar un abono del 50% del valor total
+          del paquete para confirmar la reserva. El saldo restante deberá estar completamente
+          pagado a más tardar siete (7) días calendario antes del inicio del viaje.
+        </li>
+        <li>
+          <strong>Incumplimiento:</strong> Si el cliente no cumple con los plazos
+          de pago, Plancitos.com se reserva el derecho de cancelar la reserva y aplicar
+          las penalidades correspondientes.
+        </li>
+      </ul>
+    </div>
 
-    .terms-title {
-      color: var(--system-primary-backgroundColor-1);
-      font-size: 1.8rem;
-      font-family: var(--ff-base);
-      font-weight: 600;
-      margin: 10px 0px;
-      text-align: center;
-      -webkit-text-stroke: thin;
-    }
+    <button class="accordion"
+      >Cambios en la Lista de Personas y Fechas de Ingreso y Salida:</button
+    >
+    <div class="panel">
+      <p>
+        Plancitos.com permite realizar cambios en la lista de personas, así como
+        en las fechas de ingreso y salida del viaje, bajo las siguientes
+        condiciones:
+      </p>
+      <ul class="list">
+        <li>
+          <strong>Plazo para cambios:</strong> Los cambios solicitados deben ser
+          notificados a Plancitos.com con al menos diez (10) días calendario antes
+          de la fecha de inicio del viaje.
+        </li>
 
-    @media screen and (width >= 720px) {
-      img.palm-banner {
-        object-fit: unset;
+        <li>
+          <strong>Cambios en la lista de personas:</strong> Se podrá modificar el
+          número de personas en la reserva, sujeto a la disponibilidad de los servicios
+          y la aceptación de los proveedores involucrados. En algunos casos, podrá
+          haber cargos adicionales si el cambio afecta el tipo de servicio inicialmente
+          adquirido o la disponibilidad de los servicios.
+        </li>
+
+        <li>
+          <strong>Cambios en las fechas de ingreso y salida:</strong> Las fechas
+          de ingreso y salida podrán ajustarse, siempre que haya disponibilidad en
+          el alojamiento y otros servicios relacionados con la reserva. Los cambios
+          en las fechas estarán sujetos a la política de tarifas y disponibilidad
+          de los proveedores, pudiendo generar cargos adicionales si las nuevas fechas
+          corresponden a temporadas altas o fechas de alta demanda.
+        </li>
+
+        <li>
+          <strong>Notificación y confirmación:</strong> Los cambios estarán sujetos
+          a la aprobación de Plancitos.com y los proveedores de servicios turísticos.
+          Una vez confirmados los cambios, se enviará una actualización de la reserva
+          con los detalles modificados.
+        </li>
+
+        <li>
+          <strong>Excepciones:</strong> Si el cambio no es solicitado dentro del
+          plazo establecido o si no hay disponibilidad para las modificaciones solicitadas,
+          el cliente deberá asumir las condiciones originales de la reserva o considerar
+          otras alternativas ofrecidas por Plancitos.com.
+        </li>
+      </ul>
+    </div>
+
+    <button class="accordion">Opciones Disponibles ante la Cancelación:</button>
+    <div class="panel">
+      <p>
+        En caso de solicitar la garantía de cancelación, el cliente deberá
+        generarla a más tardar 7 días antes del viaje y podrá elegir entre las
+        siguientes opciones:
+      </p>
+      <ul class="list">
+        <li>
+          Reembolso parcial, deduciendo costos administrativos y tarifas no
+          reembolsables (costo de transferencias, cargos de separación).
+        </li>
+        <li>
+          Reprogramación del viaje sujeto a disponibilidad y ajuste tarifario
+          según la temporada del nuevo viaje.
+        </li>
+        <li>
+          Crédito para futuros servicios turísticos con Plancitos.com,
+          equivalente al monto pagado menos los costos aplicables.
+        </li>
+      </ul>
+    </div>
+
+    <button class="accordion">Transferencia de Reserva a un Tercero:</button>
+    <div class="panel">
+      <ul class="list">
+        <li>
+          El cliente podrá transferir su reserva a un tercero, siempre que
+          notifique a Plancitos.com con al menos quince (15) días de
+          anticipación a la fecha del viaje.
+        </li>
+        <li>
+          Esta opción estará sujeta a las políticas de los proveedores de
+          servicios involucrados, como hoteles.
+        </li>
+      </ul>
+    </div>
+
+    <button class="accordion">Fragmentación del Servicio Turístico:</button>
+    <div class="panel">
+      <ul class="list">
+        <li>
+          En caso de cancelación parcial del grupo de viajeros en una reserva
+          múltiple, los viajeros restantes podrán conservar su itinerario
+          original, ajustándose las tarifas según la nueva composición del
+          grupo.
+        </li>
+        <li>
+          El monto correspondiente a los servicios no utilizados por los
+          viajeros cancelados se reembolsará o aplicará como crédito, sujeto a
+          las deducciones establecidas en estos términos.
+        </li>
+      </ul>
+    </div>
+
+    <button class="accordion">Pago por Daños Causados en el Hotel:</button>
+    <div class="panel">
+      <ul class="list">
+        <li>
+          El cliente es responsable por cualquier daño ocasionado a la
+          infraestructura del hotel o los bienes dentro de las instalaciones.
+        </li>
+        <li>
+          El hotel determinará el monto de los daños y gestionará el cobro al
+          cliente.
+        </li>
+        <li>
+          Plancitos.com no mediará en el proceso ni asumirá los costos
+          relacionados con estos daños.
+        </li>
+      </ul>
+    </div>
+
+    <button class="accordion"
+      >Lineamientos sobre el Tratamiento de Datos Personales:</button
+    >
+    <div class="panel">
+      <ul class="list">
+        <li>
+          El cliente autoriza a Plancitos.com a recopilar, almacenar, usar y
+          procesar sus datos personales conforme a la Ley Estatutaria 1581 de
+          2012 y sus decretos reglamentarios.
+        </li>
+        <li>
+          La información será utilizada únicamente para fines administrativos,
+          comerciales y de mejora del servicio. El cliente podrá ejercer sus
+          derechos de acceso, rectificación y supresión de datos a través de los
+          canales de atención dispuestos por Plancitos.com.
+        </li>
+      </ul>
+    </div>
+
+    <button class="accordion">Acceso de Mascotas:</button>
+    <div class="panel">
+      <p>
+        Las condiciones relacionadas con la admisión de mascotas durante la
+        prestación de servicios son establecidas directamente por los
+        proveedores, quienes son responsables de aplicarlas.
+      </p>
+      <ul class="list">
+        <li>
+          Las mascotas con una altura máxima de 40 centímetros podrán ser
+          admitidas sin costo adicional, según las políticas del proveedor
+          correspondiente.
+        </li>
+        <li>
+          En caso de que la mascota supere los 40 centímetros de altura, el
+          proveedor podrá aplicar cargos adicionales por su admisión.
+        </li>
+        <li>
+          El proveedor tiene plena facultad para decidir sobre las políticas de
+          acceso de mascotas y cualquier cobro adicional relacionado.
+        </li>
+      </ul>
+      <p>Plancitos.com no se hace responsable por:</p>
+      <ul class="list">
+        <li>
+          La implementación de estas políticas por parte de los proveedores.
+        </li>
+        <li>
+          Los cargos adicionales aplicados debido al tamaño de la mascota.
+        </li>
+        <li>
+          Resolución de conflictos relacionados con estas políticas, los cuales
+          deberán ser gestionados directamente con el proveedor correspondiente.
+        </li>
+      </ul>
+    </div>
+
+    <button class="accordion">Revisión de Documentos de Identidad:</button>
+    <div class="panel">
+      <p>
+        Los proveedores de servicios turísticos contratados a través de
+        Plancitos.com tienen la facultad de solicitar y verificar los documentos
+        de identidad de los clientes, incluyendo los de menores de edad, como
+        parte de los procedimientos de registro o acceso a sus servicios.
+      </p>
+      <ul class="list">
+        <li>
+          Es responsabilidad de los clientes garantizar que los documentos
+          presentados sean auténticos, estén vigentes y cumplan con los
+          requisitos legales aplicables.
+        </li>
+        <li>
+          En el caso de menores de edad, se podrá exigir documentación
+          adicional, como permisos de viaje o autorizaciones legales, según las
+          normativas del destino o del proveedor.
+        </li>
+      </ul>
+    </div>
+
+    <button class="accordion">Opciones de Pago:</button>
+    <div class="panel">
+      <ul class="list">
+        <li>
+          Pagos en línea: A través de plataformas de pago seguras habilitadas en
+          la página web o canales oficiales de contacto.
+        </li>
+      </ul>
+    </div>
+
+    <button class="accordion">Comidas Incluidas:</button>
+    <div class="panel">
+      <ul class="list">
+        <li>
+          Las comidas incluidas en los planes están sujetas a la disponibilidad
+          y a las políticas de los hoteles y restaurantes que prestan el
+          servicio.
+        </li>
+        <li>
+          El menú puede variar según los ingredientes disponibles, la temporada
+          o las decisiones de estos establecimientos, sin que esto implique
+          incumplimiento por parte de Plancitos.com.
+        </li>
+        <li>
+          <strong>Restricciones:</strong> La cantidad de alimentos y bebidas servidas
+          estará sujeta a las normas y condiciones del proveedor del servicio, y
+          no incluye consumos adicionales fuera del menú ofrecido como parte del
+          plan.
+        </li>
+        <li>
+          <strong>Modificaciones:</strong> En caso de cambios en los horarios, menú
+          o condiciones por parte del hotel o restaurante, se notificará al cliente
+          en la medida de lo posible para minimizar inconvenientes.
+        </li>
+        <li>
+          <strong>Horarios establecidos:</strong>
+          <ul class="list">
+            <li>Desayuno: De 7:00 a 11:00 a.m.</li>
+            <li>Almuerzo: De 12:30 p.m. a 4:30 p.m.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  var accordion = document.getElementsByClassName("accordion");
+
+  for (var index = 0; index < accordion.length; index++) {
+    accordion[index].addEventListener("click", function () {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
       }
+    });
+  }
+</script>
 
-      span.title__cont {
-        grid-column: 1/3;
-        grid-row: 2;
-        justify-content: center;
-        padding-left: 3%;
-      }
+<style>
+  .terms-wrapper {
+    width: 95%;
+    margin: auto;
+    font-family: var(--ff-base-2);
+  }
 
-      .title {
-        -webkit-text-stroke: medium;
-      }
+  h2 {
+    font-family: var(--ff-base-2);
+    color: var(--system-primary-backgroundColor-1);
+  }
+
+  h2.terms-title {
+    text-align: left;
+    margin: 2rem 0px;
+    color: var(--system-secondary-Text-1);
+    font-size: 1.8rem;
+  }
+
+  h3.subtitle {
+    color: var(--system-secundary-color-subtitle);
+    font-family: var(--ff-base-2);
+    text-align: left;
+  }
+
+  .text-intro {
+    text-wrap: stable;
+  }
+
+  .list-paragraph {
+    margin: 0px;
+    font-weight: bold;
+    color: var(--system-secundary-color-subtitle);
+  }
+
+  ul.list {
+    margin-top: 15px;
+    list-style: numeric;
+    line-height: 20px;
+  }
+
+  ul.list li::marker {
+    font-weight: bold;
+  }
+
+  .accordion {
+    background-color: #d7e7ff8f;
+    font-family: var(--ff-base-2);
+    color: var(--system-secondary-Text-1);
+    font-weight: bold;
+    cursor: pointer;
+    padding: 18px 18px 18px 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1rem;
+    transition: 0.4s;
+    border-bottom: 1px solid #bbd1f18f;
+  }
+
+  .active,
+  .accordion:hover {
+    background-color: #a7cafda2;
+  }
+
+  .accordion:after {
+    content: url("/icons/icon-down-arrow.svg");
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+  }
+
+  .active:after {
+    content: "\2212";
+    color: var(--system-secondary-Text-1);
+    font-size: 1.2rem;
+  }
+
+  .panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+
+  .panel:last-child {
+    margin-bottom: 50px;
+  }
+
+  @media screen and (width >= 720px) {
+    .terms-wrapper {
+      width: 95%;
+      margin: auto;
     }
 
-    @media screen and (width >= 1150px) {
-      img.palm-banner {
-        object-fit: cover;
-        mask-repeat: repeat;
-      }
-      span.title__cont {
-        grid-column: 1/3;
-        grid-row: 2;
-      }
+    
+  h2.terms-title {
+    font-size: 2rem;
+  }
 
-      .title {
-        color: white;
-        font-size: 6rem;
-      }
+  @media screen and (width >= 1400px) {
+    .terms-wrapper {
+      width: 100%;
     }
-  </style></BaseLayout
->
+  }
+</style>
